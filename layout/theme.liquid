@@ -48,7 +48,19 @@
     }
   {% endstyle %}
 
-  {{ 'styles.css' | asset_url | stylesheet_tag: preload: true }}
+  <!-- Critical CSS inline for faster rendering -->
+  <style>
+    /* Critical CSS - Above the fold styles */
+    body { margin: 0; padding: 0; font-family: {{ base_font.family }}, {{ base_font.fallback_families }}; }
+    .site-header { position: relative; z-index: 100; }
+    .main-content { min-height: 50vh; }
+    .loading { opacity: 0; transition: opacity 0.3s ease; }
+    .loaded { opacity: 1; }
+  </style>
+  
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ 'styles.css' | asset_url }}"></noscript>
 
   {{ content_for_header }}
 
@@ -179,8 +191,13 @@
 
 </head>
 
-<body class="page-{{ page_title | handle }} {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if template.suffix != blank %} template-suffix-{{ template.suffix }}{% endif %}{% if template contains 'customers' %} template-customer-area{% endif %}{% if logo_html contains 'img' %} has-logo{% endif %} animation-speed-{{ settings.animation_speed }}"
+<body class="page-{{ page_title | handle }} {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if template.suffix != blank %} template-suffix-{{ template.suffix }}{% endif %}{% if template contains 'customers' %} template-customer-area{% endif %}{% if logo_html contains 'img' %} has-logo{% endif %} animation-speed-{{ settings.animation_speed }} loading"
       {% if settings.animation_speed == "fast" %}data-cc-animate-timeout="0"{% endif %}>
+
+  <!-- Performance Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-spinner"></div>
+  </div>
   {% if settings.animation_enabled_mobile %}
     <script>
       if(window.innerWidth < 768 && window.localStorage.getItem('is_first_visit') !== null) {
@@ -354,11 +371,18 @@
 // };
 
   </script>
-  <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'theme-addons.js' | asset_url }}" defer="defer"></script>
+  
+  <!-- Performance Optimizer - Load first for immediate optimizations -->
+  <script src="{{ 'performance-optimizer.js' | asset_url }}" defer></script>
+  
+  <!-- Critical JavaScript - Load with defer -->
+  <script src="{{ 'vendor.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  
+  <!-- Non-critical JavaScript - Load with async -->
+  <script src="{{ 'theme-addons.js' | asset_url }}" async></script>
+  <script src="{{ 'price-range-filter.js' | asset_url }}" async></script>
 
   {% render 'body-end-tag' %}
-  <script src="{{ 'price-range-filter.js' | asset_url }}" defer="defer"></script>
 </body>
 </html>

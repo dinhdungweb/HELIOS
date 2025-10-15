@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
 <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//connect.facebook.net">
 
 {%- liquid
   assign base_font = settings.type_base_font
@@ -35,8 +38,14 @@
   <link rel="preload" as="font" href="{{ logo_font | font_url }}" type="font/woff2" crossorigin>
 {%- endunless -%}
 
+<!-- Preload critical resources -->
 <link rel="preload" href="{{ 'vendor.min.js' | asset_url }}" as="script">
 <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
+<link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
+
+<!-- Prefetch non-critical resources -->
+<link rel="prefetch" href="{{ 'theme-addons.js' | asset_url }}" as="script">
+<link rel="prefetch" href="{{ 'price-range-filter.js' | asset_url }}" as="script">
 
 {%- if canonical_url != blank  -%}
   <link rel="canonical" href="{{ canonical_url }}" />
@@ -55,3 +64,6 @@
 {%- if page_description -%}
   <meta name="description" content="{{ page_description | escape }}">
 {%- endif -%}
+
+<!-- Performance Optimizer CSS - Load early for immediate optimizations -->
+<link rel="stylesheet" href="{{ 'performance-optimizer.css' | asset_url }}" media="all">
