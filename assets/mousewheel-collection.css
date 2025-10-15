@@ -372,3 +372,22 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
     padding-top: 90px;
   }
 }
+
+/* Responsive media display */
+.desktop-media {
+  display: block;
+}
+
+.mobile-media {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-media {
+    display: none;
+  }
+  
+  .mobile-media {
+    display: block;
+  }
+}

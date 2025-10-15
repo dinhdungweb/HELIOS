@@ -18,14 +18,31 @@
           {% case block.type %}
             {% when 'image' %}
               <div class="slide-content image-slide">
-                {% if block.settings.image != blank %}
+                {% assign desktop_image = block.settings.image %}
+                {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+                
+                {% if desktop_image != blank or mobile_image != blank %}
                   <div class="image-wrapper">
-                    <img 
-                      src="{{ block.settings.image | img_url: 'master' }}"
-                      alt="{{ block.settings.image.alt | escape }}"
-                      loading="lazy"
-                      class="full-width-image"
-                    >
+                    <!-- Desktop Image -->
+                    {% if desktop_image != blank %}
+                      <img 
+                        src="{{ desktop_image | img_url: 'master' }}"
+                        alt="{{ desktop_image.alt | escape }}"
+                        loading="lazy"
+                        class="full-width-image desktop-media"
+                      >
+                    {% endif %}
+                    
+                    <!-- Mobile Image -->
+                    {% if mobile_image != blank and mobile_image != desktop_image %}
+                      <img 
+                        src="{{ mobile_image | img_url: 'master' }}"
+                        alt="{{ mobile_image.alt | escape }}"
+                        loading="lazy"
+                        class="full-width-image mobile-media"
+                      >
+                    {% endif %}
+                    
                     {% if block.settings.heading != blank or block.settings.text != blank %}
                       <div class="slide-text-overlay">
                         {% if block.settings.heading != blank %}
@@ -50,51 +67,104 @@
               </div>
             {% when 'video' %}
               <div class="slide-content video-slide">
-                {% if block.settings.video != blank %}
-                  <!-- Shopify uploaded video -->
-                  <div class="video-wrapper">
-                    <video 
-                      playsinline 
-                      loop 
-                      muted 
-                      autoplay
-                      class="full-width-video"
-                      id="shopify-video-{{ block.id }}"
-                    >
-                      {% for source in block.settings.video.sources %}
-                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
-                      {% endfor %}
-                    </video>
-                  </div>
-                {% elsif block.settings.video_url != blank %}
-                  <!-- External video URL -->
-                  <div class="video-wrapper">
-                    {% if block.settings.video_url.type == 'youtube' %}
-                      <iframe 
-                        src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ block.settings.video_url.id }}&rel=0&enablejsapi=1" 
-                        frameborder="0" 
-                        allow="autoplay; encrypted-media" 
-                        allowfullscreen 
+                {% assign desktop_video = block.settings.video %}
+                {% assign mobile_video = block.settings.video_mobile | default: block.settings.video %}
+                {% assign desktop_video_url = block.settings.video_url %}
+                {% assign mobile_video_url = block.settings.video_url_mobile | default: block.settings.video_url %}
+                
+                <!-- Desktop Video -->
+                <div class="desktop-media">
+                  {% if desktop_video != blank %}
+                    <!-- Shopify uploaded video - Desktop -->
+                    <div class="video-wrapper">
+                      <video 
+                        playsinline 
+                        loop 
+                        muted 
+                        autoplay
                         class="full-width-video"
-                        id="youtube-{{ block.id }}"
-                      ></iframe>
-                    {% elsif block.settings.video_url.type == 'vimeo' %}
-                      <iframe 
-                        src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?background=1&autoplay=1&loop=1&byline=0&title=0" 
-                        frameborder="0" 
-                        webkitallowfullscreen 
-                        mozallowfullscreen 
-                        allowfullscreen 
+                        id="shopify-video-desktop-{{ block.id }}"
+                      >
+                        {% for source in desktop_video.sources %}
+                          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                        {% endfor %}
+                      </video>
+                    </div>
+                  {% elsif desktop_video_url != blank %}
+                    <!-- External video URL - Desktop -->
+                    <div class="video-wrapper">
+                      {% if desktop_video_url.type == 'youtube' %}
+                        <iframe 
+                          src="https://www.youtube.com/embed/{{ desktop_video_url.id }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ desktop_video_url.id }}&rel=0&enablejsapi=1" 
+                          frameborder="0" 
+                          allow="autoplay; encrypted-media" 
+                          allowfullscreen 
+                          class="full-width-video"
+                          id="youtube-desktop-{{ block.id }}"
+                        ></iframe>
+                      {% elsif desktop_video_url.type == 'vimeo' %}
+                        <iframe 
+                          src="https://player.vimeo.com/video/{{ desktop_video_url.id }}?background=1&autoplay=1&loop=1&byline=0&title=0" 
+                          frameborder="0" 
+                          webkitallowfullscreen 
+                          mozallowfullscreen 
+                          allowfullscreen 
+                          class="full-width-video"
+                          id="vimeo-desktop-{{ block.id }}"
+                        ></iframe>
+                      {% endif %}
+                    </div>
+                  {% else %}
+                    <div class="placeholder-container">
+                      {{ 'video' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {% endif %}
+                </div>
+                
+                <!-- Mobile Video -->
+                <div class="mobile-media">
+                  {% if mobile_video != blank and mobile_video != desktop_video %}
+                    <!-- Shopify uploaded video - Mobile -->
+                    <div class="video-wrapper">
+                      <video 
+                        playsinline 
+                        loop 
+                        muted 
+                        autoplay
                         class="full-width-video"
-                        id="vimeo-{{ block.id }}"
-                      ></iframe>
-                    {% endif %}
-                  </div>
-                {% else %}
-                  <div class="placeholder-container">
-                    {{ 'video' | placeholder_svg_tag: 'placeholder-svg' }}
-                  </div>
-                {% endif %}
+                        id="shopify-video-mobile-{{ block.id }}"
+                      >
+                        {% for source in mobile_video.sources %}
+                          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                        {% endfor %}
+                      </video>
+                    </div>
+                  {% elsif mobile_video_url != blank and mobile_video_url != desktop_video_url %}
+                    <!-- External video URL - Mobile -->
+                    <div class="video-wrapper">
+                      {% if mobile_video_url.type == 'youtube' %}
+                        <iframe 
+                          src="https://www.youtube.com/embed/{{ mobile_video_url.id }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ mobile_video_url.id }}&rel=0&enablejsapi=1" 
+                          frameborder="0" 
+                          allow="autoplay; encrypted-media" 
+                          allowfullscreen 
+                          class="full-width-video"
+                          id="youtube-mobile-{{ block.id }}"
+                        ></iframe>
+                      {% elsif mobile_video_url.type == 'vimeo' %}
+                        <iframe 
+                          src="https://player.vimeo.com/video/{{ mobile_video_url.id }}?background=1&autoplay=1&loop=1&byline=0&title=0" 
+                          frameborder="0" 
+                          webkitallowfullscreen 
+                          mozallowfullscreen 
+                          allowfullscreen 
+                          class="full-width-video"
+                          id="vimeo-mobile-{{ block.id }}"
+                        ></iframe>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
                 
                 {% if block.settings.heading != blank or block.settings.text != blank %}
                   <div class="slide-text-overlay">
@@ -290,9 +360,27 @@
       "name": "Hình ảnh",
       "settings": [
         {
+          "type": "header",
+          "content": "Hình ảnh Desktop"
+        },
+        {
           "type": "image_picker",
           "id": "image",
-          "label": "Hình ảnh"
+          "label": "Hình ảnh Desktop"
+        },
+        {
+          "type": "header",
+          "content": "Hình ảnh Mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Hình ảnh Mobile",
+          "info": "Nếu không chọn, sẽ sử dụng hình ảnh desktop"
+        },
+        {
+          "type": "header",
+          "content": "Nội dung"
         },
         {
           "type": "text",
@@ -324,23 +412,58 @@
       "name": "Video",
       "settings": [
         {
+          "type": "header",
+          "content": "Video Desktop"
+        },
+        {
           "type": "video",
           "id": "video",
-          "label": "Video",
+          "label": "Video Desktop",
           "info": "Tải lên video hoặc chọn từ thư viện"
         },
         {
           "type": "video_url",
           "id": "video_url",
           "accept": ["youtube", "vimeo"],
-          "label": "Video URL (tùy chọn)",
+          "label": "Video URL Desktop (tùy chọn)",
           "info": "YouTube hoặc Vimeo - sử dụng nếu không upload video"
+        },
+        {
+          "type": "header",
+          "content": "Video Mobile"
+        },
+        {
+          "type": "video",
+          "id": "video_mobile",
+          "label": "Video Mobile",
+          "info": "Video riêng cho mobile - nếu không chọn sẽ dùng video desktop"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url_mobile",
+          "accept": ["youtube", "vimeo"],
+          "label": "Video URL Mobile (tùy chọn)",
+          "info": "YouTube hoặc Vimeo cho mobile"
+        },
+        {
+          "type": "header",
+          "content": "Ảnh bìa"
         },
         {
           "type": "image_picker",
           "id": "video_cover",
-          "label": "Ảnh bìa video (tùy chọn)",
+          "label": "Ảnh bìa video Desktop (tùy chọn)",
           "info": "Sẽ sử dụng thumbnail mặc định nếu không chọn"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_cover_mobile",
+          "label": "Ảnh bìa video Mobile (tùy chọn)",
+          "info": "Ảnh bìa riêng cho mobile"
+        },
+        {
+          "type": "header",
+          "content": "Nội dung"
         },
         {
           "type": "text",
