@@ -62,6 +62,7 @@
           "type": "slideshow",
           "settings": {
             "slide1_image_desktop": "shopify://shop_images/19_9.jpg",
+            "slide1_image_mobile": "shopify://shop_images/SRK02892.jpg",
             "slide1_link": "",
             "slide1_heading": "Slide đầu tiên",
             "slide1_text": "<p>Mô tả cho slide đầu tiên</p>",
