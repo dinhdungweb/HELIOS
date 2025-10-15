@@ -61,17 +61,6 @@
             "button_link": ""
           }
         },
-        "image_jt3QnA": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg",
-            "image_mobile": "shopify://shop_images/SRK02159.jpg",
-            "heading": "",
-            "text": "",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
         "shop_the_look_BQhijL": {
           "type": "shop-the-look",
           "settings": {
@@ -90,7 +79,6 @@
       "block_order": [
         "video_MYGqcp",
         "image_k9Yex9",
-        "image_jt3QnA",
         "shop_the_look_BQhijL"
       ],
       "name": "Mousewheel Collection",
