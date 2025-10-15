@@ -334,30 +334,22 @@
                         <div class="slideshow-image-container">
                           <!-- Desktop Image -->
                           {% if desktop_image_1 != blank %}
-                            <div class="rimage-outer-wrapper desktop-only">
-                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: desktop_image_1.aspect_ratio | times: 100 }}%">
-                                <img class="rimage__image"
-                                     src="{{ desktop_image_1 | img_url: '1x1' }}"
-                                     data-bgset="{% render 'bgset', image: desktop_image_1 %}"
-                                     data-sizes="auto"
-                                     data-parent-fit="cover"
-                                     alt="{{ desktop_image_1.alt | escape }}">
-                              </div>
-                            </div>
+                            <img 
+                              src="{{ desktop_image_1 | img_url: 'master' }}"
+                              alt="{{ desktop_image_1.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image desktop-media"
+                            >
                           {% endif %}
                           
                           <!-- Mobile Image -->
-                          {% if mobile_image_1 != blank %}
-                            <div class="rimage-outer-wrapper mobile-only">
-                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: mobile_image_1.aspect_ratio | times: 100 }}%">
-                                <img class="rimage__image"
-                                     src="{{ mobile_image_1 | img_url: '1x1' }}"
-                                     data-bgset="{% render 'bgset', image: mobile_image_1 %}"
-                                     data-sizes="auto"
-                                     data-parent-fit="cover"
-                                     alt="{{ mobile_image_1.alt | escape }}">
-                              </div>
-                            </div>
+                          {% if mobile_image_1 != blank and mobile_image_1 != desktop_image_1 %}
+                            <img 
+                              src="{{ mobile_image_1 | img_url: 'master' }}"
+                              alt="{{ mobile_image_1.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image mobile-media"
+                            >
                           {% endif %}
                         </div>
                         
@@ -408,30 +400,22 @@
                         <div class="slideshow-image-container">
                           <!-- Desktop Image -->
                           {% if desktop_image_2 != blank %}
-                            <div class="rimage-outer-wrapper desktop-only">
-                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: desktop_image_2.aspect_ratio | times: 100 }}%">
-                                <img class="rimage__image"
-                                     src="{{ desktop_image_2 | img_url: '1x1' }}"
-                                     data-bgset="{% render 'bgset', image: desktop_image_2 %}"
-                                     data-sizes="auto"
-                                     data-parent-fit="cover"
-                                     alt="{{ desktop_image_2.alt | escape }}">
-                              </div>
-                            </div>
+                            <img 
+                              src="{{ desktop_image_2 | img_url: 'master' }}"
+                              alt="{{ desktop_image_2.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image desktop-media"
+                            >
                           {% endif %}
                           
                           <!-- Mobile Image -->
-                          {% if mobile_image_2 != blank %}
-                            <div class="rimage-outer-wrapper mobile-only">
-                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: mobile_image_2.aspect_ratio | times: 100 }}%">
-                                <img class="rimage__image"
-                                     src="{{ mobile_image_2 | img_url: '1x1' }}"
-                                     data-bgset="{% render 'bgset', image: mobile_image_2 %}"
-                                     data-sizes="auto"
-                                     data-parent-fit="cover"
-                                     alt="{{ mobile_image_2.alt | escape }}">
-                              </div>
-                            </div>
+                          {% if mobile_image_2 != blank and mobile_image_2 != desktop_image_2 %}
+                            <img 
+                              src="{{ mobile_image_2 | img_url: 'master' }}"
+                              alt="{{ mobile_image_2.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image mobile-media"
+                            >
                           {% endif %}
                         </div>
                         
