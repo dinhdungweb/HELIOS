@@ -64,9 +64,6 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
 }
 
 .full-width-image,
@@ -75,22 +72,14 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  min-width: 100%;
-  min-height: 100%;
 }
 
 /* Ensure iframe videos are full screen */
 iframe.full-width-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  transform: scale(1.01); /* Slight scale to ensure full coverage */
+  display: block;
 }
 
 /* Specific styles for Shopify uploaded videos */
@@ -100,11 +89,6 @@ video[id^="shopify-video-"] {
   object-fit: cover;
   display: block;
   background: #000;
-  min-width: 100%;
-  min-height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 /* Ensure video poster images display correctly */
@@ -494,23 +478,12 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   transform-origin: center center;
 }
 
-/* Ensure video fills container even with different aspect ratios */
-@media (max-aspect-ratio: 16/9) {
-  .mousewheel-collection video,
-  .mousewheel-collection iframe {
-    width: auto !important;
-    height: 100% !important;
-    min-width: 100% !important;
-  }
-}
-
-@media (min-aspect-ratio: 16/9) {
-  .mousewheel-collection video,
-  .mousewheel-collection iframe {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 100% !important;
-  }
+/* Ensure video fills container properly */
+.mousewheel-collection video,
+.mousewheel-collection iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Additional mobile video optimizations */
