@@ -1,0 +1,388 @@
+{% comment %}
+  Section: Mousewheel Collection
+  - Tạo landing page cho bộ sưu tập mới với hiệu ứng mousewheel control
+  - Hỗ trợ hiển thị cả video và hình ảnh
+  - Thiết kế tương tự như trang web YSL
+{% endcomment %}
+
+<!-- Mousewheel Collection CSS -->
+{{ 'mousewheel-collection.css' | asset_url | stylesheet_tag }}
+
+<div class="mousewheel-collection section-{{ section.id }}" 
+     id="mousewheel-collection-{{ section.id }}"
+     data-height="{{ section.settings.height }}">
+  <div class="mousewheel-swiper-container swiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide" {{ block.shopify_attributes }}>
+          {% case block.type %}
+            {% when 'image' %}
+              <div class="slide-content image-slide">
+                {% if block.settings.image != blank %}
+                  <div class="image-wrapper">
+                    <img 
+                      src="{{ block.settings.image | img_url: 'master' }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                      class="full-width-image"
+                    >
+                    {% if block.settings.heading != blank or block.settings.text != blank %}
+                      <div class="slide-text-overlay">
+                        {% if block.settings.heading != blank %}
+                          <h2 class="slide-heading">{{ block.settings.heading }}</h2>
+                        {% endif %}
+                        {% if block.settings.text != blank %}
+                          <div class="slide-text">{{ block.settings.text }}</div>
+                        {% endif %}
+                        {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                          <a href="{{ block.settings.button_link }}" class="slide-button">
+                            {{ block.settings.button_label }}
+                          </a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% else %}
+                  <div class="placeholder-container">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              </div>
+            {% when 'video' %}
+              <div class="slide-content video-slide">
+                {% if block.settings.video != blank %}
+                  <!-- Shopify uploaded video -->
+                  <div class="video-wrapper">
+                    <video 
+                      playsinline 
+                      loop 
+                      muted 
+                      class="full-width-video"
+                      id="shopify-video-{{ block.id }}"
+                      poster="{% if block.settings.video_cover != blank %}{{ block.settings.video_cover | img_url: 'master' }}{% else %}{{ block.settings.video.preview_image | img_url: 'master' }}{% endif %}"
+                    >
+                      {% for source in block.settings.video.sources %}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {% endfor %}
+                    </video>
+                  </div>
+                {% elsif block.settings.video_url != blank %}
+                  <!-- External video URL -->
+                  <div class="video-wrapper">
+                    {% if block.settings.video_url.type == 'youtube' %}
+                      <iframe 
+                        src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=0&controls=0&mute=1&loop=1&playlist={{ block.settings.video_url.id }}&rel=0&enablejsapi=1" 
+                        frameborder="0" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen 
+                        class="full-width-video"
+                        id="youtube-{{ block.id }}"
+                      ></iframe>
+                    {% elsif block.settings.video_url.type == 'vimeo' %}
+                      <iframe 
+                        src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?background=1&autoplay=0&loop=1&byline=0&title=0" 
+                        frameborder="0" 
+                        webkitallowfullscreen 
+                        mozallowfullscreen 
+                        allowfullscreen 
+                        class="full-width-video"
+                        id="vimeo-{{ block.id }}"
+                      ></iframe>
+                    {% endif %}
+                  </div>
+                {% else %}
+                  <div class="placeholder-container">
+                    {{ 'video' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.heading != blank or block.settings.text != blank %}
+                  <div class="slide-text-overlay">
+                    {% if block.settings.heading != blank %}
+                      <h2 class="slide-heading">{{ block.settings.heading }}</h2>
+                    {% endif %}
+                    {% if block.settings.text != blank %}
+                      <div class="slide-text">{{ block.settings.text }}</div>
+                    {% endif %}
+                    {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                      <a href="{{ block.settings.button_link }}" class="slide-button">
+                        {{ block.settings.button_label }}
+                      </a>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+          {% endcase %}
+        </div>
+      {% endfor %}
+    </div>
+    
+    <!-- Pagination -->
+    {% if section.settings.show_pagination %}
+      <div class="swiper-pagination"></div>
+    {% endif %}
+    
+    <!-- Navigation -->
+    {% if section.settings.show_navigation %}
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Wait for Swiper to be loaded
+    if (typeof Swiper === 'undefined') {
+      console.error('Swiper library not loaded');
+      return;
+    }
+    
+    const swiperContainer = document.querySelector('#mousewheel-collection-{{ section.id }} .mousewheel-swiper-container');
+    
+    if (swiperContainer) {
+      const swiper = new Swiper(swiperContainer, {
+        direction: 'vertical',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        speed: 1000,
+        effect: 'slide',
+        grabCursor: true,
+        mousewheel: true,
+        mousewheelControl: true,
+        mousewheelReleaseOnEdges: true,
+        mousewheelForceToAxis: true,
+        mousewheelSensitivity: 1,
+        keyboardControl: true,
+        {% if section.settings.show_pagination %}
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        paginationDynamicBullets: true,
+        {% endif %}
+        {% if section.settings.show_navigation %}
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        {% endif %}
+        onInit: function(swiper) {
+          playCurrentSlideVideo(swiper);
+        },
+        onSlideChangeEnd: function(swiper) {
+          playCurrentSlideVideo(swiper);
+        },
+        onResize: function(swiper) {
+          swiper.update();
+        }
+      });
+      
+      function playCurrentSlideVideo(swiper) {
+        try {
+          // Pause all videos first (including Shopify uploaded videos)
+          const allVideos = document.querySelectorAll('#mousewheel-collection-{{ section.id }} video');
+          allVideos.forEach(video => {
+            video.pause();
+          });
+          
+          // Pause all YouTube videos
+          const allYoutubeIframes = document.querySelectorAll('#mousewheel-collection-{{ section.id }} iframe[id^="youtube-"]');
+          allYoutubeIframes.forEach(iframe => {
+            if (iframe.contentWindow) {
+              iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+          });
+          
+          // Pause all Vimeo videos
+          const allVimeoIframes = document.querySelectorAll('#mousewheel-collection-{{ section.id }} iframe[id^="vimeo-"]');
+          allVimeoIframes.forEach(iframe => {
+            if (iframe.contentWindow) {
+              iframe.contentWindow.postMessage('{"method":"pause"}', '*');
+            }
+          });
+          
+          // Get current slide
+          const currentSlide = swiper.slides[swiper.activeIndex];
+          if (!currentSlide) return;
+          
+          // Play video if current slide has one (HTML5 video including Shopify uploaded)
+          const video = currentSlide.querySelector('video');
+          if (video) {
+            video.currentTime = 0; // Reset to beginning
+            video.play().catch(e => console.log('Video autoplay prevented:', e));
+          }
+          
+          // Handle YouTube videos
+          const youtubeIframe = currentSlide.querySelector('iframe[id^="youtube-"]');
+          if (youtubeIframe && youtubeIframe.contentWindow) {
+            youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+          }
+          
+          // Handle Vimeo videos
+          const vimeoIframe = currentSlide.querySelector('iframe[id^="vimeo-"]');
+          if (vimeoIframe && vimeoIframe.contentWindow) {
+            vimeoIframe.contentWindow.postMessage('{"method":"play"}', '*');
+          }
+        } catch (error) {
+          console.error('Error in playCurrentSlideVideo:', error);
+        }
+      }
+      
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        swiper.update();
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Mousewheel Collection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cài đặt chung"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Chiều cao section",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Tự động điều chỉnh theo nội dung"
+        },
+        {
+          "value": "small",
+          "label": "Nhỏ"
+        },
+        {
+          "value": "medium",
+          "label": "Vừa"
+        },
+        {
+          "value": "large",
+          "label": "Lớn"
+        },
+        {
+          "value": "full",
+          "label": "Toàn màn hình"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Hiển thị chấm phân trang",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Hiển thị nút điều hướng",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Hình ảnh",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Hình ảnh"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Tiêu đề",
+          "default": "Bộ sưu tập mới"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Nội dung",
+          "default": "<p>Mô tả ngắn về bộ sưu tập của bạn</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Nhãn nút",
+          "default": "Xem thêm"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Liên kết nút"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Tải lên video hoặc chọn từ thư viện"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "label": "Video URL (tùy chọn)",
+          "info": "YouTube hoặc Vimeo - sử dụng nếu không upload video"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_cover",
+          "label": "Ảnh bìa video (tùy chọn)",
+          "info": "Sẽ sử dụng thumbnail mặc định nếu không chọn"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Tiêu đề",
+          "default": "Bộ sưu tập mới"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Nội dung",
+          "default": "<p>Mô tả ngắn về bộ sưu tập của bạn</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Nhãn nút",
+          "default": "Xem thêm"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Liên kết nút"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mousewheel Collection",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
