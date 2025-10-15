@@ -57,9 +57,9 @@
                       playsinline 
                       loop 
                       muted 
+                      autoplay
                       class="full-width-video"
                       id="shopify-video-{{ block.id }}"
-                      poster="{% if block.settings.video_cover != blank %}{{ block.settings.video_cover | img_url: 'master' }}{% else %}{{ block.settings.video.preview_image | img_url: 'master' }}{% endif %}"
                     >
                       {% for source in block.settings.video.sources %}
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
@@ -71,7 +71,7 @@
                   <div class="video-wrapper">
                     {% if block.settings.video_url.type == 'youtube' %}
                       <iframe 
-                        src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=0&controls=0&mute=1&loop=1&playlist={{ block.settings.video_url.id }}&rel=0&enablejsapi=1" 
+                        src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=1&controls=0&mute=1&loop=1&playlist={{ block.settings.video_url.id }}&rel=0&enablejsapi=1" 
                         frameborder="0" 
                         allow="autoplay; encrypted-media" 
                         allowfullscreen 
@@ -80,7 +80,7 @@
                       ></iframe>
                     {% elsif block.settings.video_url.type == 'vimeo' %}
                       <iframe 
-                        src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?background=1&autoplay=0&loop=1&byline=0&title=0" 
+                        src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?background=1&autoplay=1&loop=1&byline=0&title=0" 
                         frameborder="0" 
                         webkitallowfullscreen 
                         mozallowfullscreen 
