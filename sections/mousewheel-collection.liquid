@@ -208,6 +208,20 @@
       return;
     }
     
+    // Throttle function for better performance
+    function throttle(func, limit) {
+      let inThrottle;
+      return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      }
+    }
+    
     const swiperContainer = document.querySelector('#mousewheel-collection-{{ section.id }} .mousewheel-swiper-container');
     
     if (swiperContainer) {
@@ -215,32 +229,45 @@
         direction: 'vertical',
         slidesPerView: 1,
         spaceBetween: 0,
-        speed: 1000,
+        speed: 800,
         effect: 'slide',
         grabCursor: true,
-        mousewheel: true,
-        mousewheelControl: true,
-        mousewheelReleaseOnEdges: true,
-        mousewheelForceToAxis: true,
-        mousewheelSensitivity: 1,
-        keyboardControl: true,
+        mousewheel: {
+          enabled: true,
+          sensitivity: 0.5,
+          eventsTarget: swiperContainer,
+          releaseOnEdges: true,
+          forceToAxis: true,
+          thresholdDelta: 50,
+          thresholdTime: 500
+        },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: true
+        },
         {% if section.settings.show_pagination %}
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        paginationDynamicBullets: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true
+        },
         {% endif %}
         {% if section.settings.show_navigation %}
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
         {% endif %}
-        onInit: function(swiper) {
-          playCurrentSlideVideo(swiper);
-        },
-        onSlideChangeEnd: function(swiper) {
-          playCurrentSlideVideo(swiper);
-        },
-        onResize: function(swiper) {
-          swiper.update();
+        on: {
+          init: function() {
+            playCurrentSlideVideo(this);
+          },
+          slideChangeTransitionEnd: function() {
+            playCurrentSlideVideo(this);
+          },
+          resize: function() {
+            this.update();
+          }
         }
       });
       
@@ -295,10 +322,22 @@
         }
       }
       
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        swiper.update();
-      });
+      // Handle window resize with throttling
+      window.addEventListener('resize', throttle(function() {
+        if (swiper && !swiper.destroyed) {
+          swiper.update();
+        }
+      }, 250));
+      
+      // Additional mousewheel optimization
+      let isScrolling = false;
+      swiperContainer.addEventListener('wheel', throttle(function(e) {
+        if (isScrolling) return;
+        isScrolling = true;
+        setTimeout(() => {
+          isScrolling = false;
+        }, 100);
+      }, 50), { passive: true });
     }
   });
 </script>
