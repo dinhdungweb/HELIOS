@@ -1060,7 +1060,7 @@
       "button.chat-toggle.chat-toggle--text-button {border-radius: 99px !important; height: 50px !important;}",
       "button.chat-toggle {margin: 0 !important;}",
       "#site-control .featured-link > a,#page-menu .featured-link > a {color: #111 !important; background: #fab320;}",
-      ".video-overlay-content {bottom: 0;}"
+      ".video-overlay-content {bottom: 30%;}"
     ]
   }
 }
