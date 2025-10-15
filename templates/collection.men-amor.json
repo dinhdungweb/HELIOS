@@ -127,13 +127,14 @@
         },
         "video_JfyQKL": {
           "type": "video",
-          "disabled": true,
           "settings": {
+            "video": "shopify://files/videos/Video beauty chú Hoàng Hải (focus áo nhẫn) 16x9.mp4",
             "video_url": "",
+            "video_mobile": "shopify://files/videos/Video beauty chú Hoàng Hải (focus áo nhẫn) 9x16 (1).mp4",
             "video_url_mobile": "",
-            "heading": "Bộ sưu tập mới",
-            "text": "<p>Mô tả ngắn về bộ sưu tập của bạn</p>",
-            "button_label": "Xem thêm",
+            "heading": "",
+            "text": "",
+            "button_label": "",
             "button_link": ""
           }
         },
