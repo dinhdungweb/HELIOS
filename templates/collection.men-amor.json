@@ -103,10 +103,6 @@
             "slide7_heading": "",
             "slide7_text": "",
             "slide7_button_label": "",
-            "slide8_link": "",
-            "slide8_heading": "Slide thứ tám",
-            "slide8_text": "<p>Mô tả cho slide thứ tám</p>",
-            "slide8_button_label": "Khám phá",
             "autoplay": true,
             "autoplay_speed": 5,
             "show_dots": true,
@@ -128,6 +124,28 @@
             "button_label": "",
             "button_link": ""
           }
+        },
+        "video_JfyQKL": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "video_url_mobile": "",
+            "heading": "Bộ sưu tập mới",
+            "text": "<p>Mô tả ngắn về bộ sưu tập của bạn</p>",
+            "button_label": "Xem thêm",
+            "button_link": ""
+          }
+        },
+        "image_bTKgNC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/z7117962862879_555e64e62f1506fc0e5636492216854c.jpg",
+            "image_mobile": "shopify://shop_images/tren.jpg",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
@@ -135,7 +153,9 @@
         "image_k9Yex9",
         "banner_7nh4WG",
         "slideshow_8QNkPn",
-        "image_zP8nHf"
+        "image_zP8nHf",
+        "video_JfyQKL",
+        "image_bTKgNC"
       ],
       "name": "Mousewheel Collection",
       "settings": {
