@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "mousewheel_collection_banner_demo": {
@@ -6,20 +15,6 @@
         "banner_1": {
           "type": "banner",
           "settings": {
-            "banner_image_left": "",
-            "banner_image_left_mobile": "",
-            "banner_link_left": "/collections/new-arrivals",
-            "heading_left": "Bộ Sưu Tập Mới",
-            "text_left": "<p>Khám phá những sản phẩm mới nhất với thiết kế độc đáo</p>",
-            "button_label_left": "Xem Ngay",
-            "button_link_left": "/collections/featured",
-            "banner_image_right": "",
-            "banner_image_right_mobile": "",
-            "banner_link_right": "/collections/trending",
-            "heading_right": "Xu Hướng Hot",
-            "text_right": "<p>Những sản phẩm đang được yêu thích nhất hiện tại</p>",
-            "button_label_right": "Khám Phá",
-            "button_link_right": "/collections/trending",
             "open_new_tab": false
           }
         },
@@ -37,49 +32,19 @@
         "banner_2": {
           "type": "banner",
           "settings": {
-            "banner_image_left": "",
-            "banner_image_left_mobile": "",
-            "banner_link_left": "/pages/sale",
-            "heading_left": "Sale 50%",
-            "text_left": "<p>Giảm giá lên đến 50% cho tất cả sản phẩm</p>",
-            "button_label_left": "Mua Ngay",
-            "button_link_left": "/collections/sale",
-            "banner_image_right": "",
-            "banner_image_right_mobile": "",
-            "banner_link_right": "/collections/accessories",
-            "heading_right": "Phụ Kiện",
-            "text_right": "<p>Bộ sưu tập phụ kiện thời trang đa dạng</p>",
-            "button_label_right": "Xem Phụ Kiện",
-            "button_link_right": "/collections/accessories",
             "open_new_tab": true
           }
         },
         "banner_3": {
           "type": "banner",
           "settings": {
-            "banner_image_left": "",
-            "banner_image_left_mobile": "",
-            "banner_link_left": "/collections/premium",
-            "heading_left": "Premium Collection",
-            "text_left": "<p>Bộ sưu tập cao cấp với chất liệu đẳng cấp</p>",
-            "button_label_left": "Khám Phá Premium",
-            "button_link_left": "/collections/luxury",
-            "banner_image_right": "",
-            "banner_image_right_mobile": "",
-            "banner_link_right": "/collections/limited",
-            "heading_right": "Limited Edition",
-            "text_right": "<p>Phiên bản giới hạn - Chỉ có tại đây</p>",
-            "button_label_right": "Sở Hữu Ngay",
-            "button_link_right": "/collections/limited",
             "open_new_tab": false
           }
         },
         "video_1": {
           "type": "video",
           "settings": {
-            "video": "",
             "video_url": "",
-            "video_mobile": "",
             "video_url_mobile": "",
             "heading": "Video Giới Thiệu",
             "text": "<p>Xem video giới thiệu về thương hiệu của chúng tôi</p>",
@@ -90,7 +55,7 @@
       },
       "block_order": [
         "banner_1",
-        "image_1", 
+        "image_1",
         "banner_2",
         "banner_3",
         "video_1"
