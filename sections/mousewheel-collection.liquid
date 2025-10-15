@@ -182,6 +182,76 @@
                   </div>
                 {% endif %}
               </div>
+            {% when 'shop-the-look' %}
+              <div class="slide-content shop-the-look-slide">
+                <div class="shop-the-look-content" data-banner-width="{{ block.settings.banner_width }}">
+                  <!-- Banner Section -->
+                  <div class="shop-the-look-banner">
+                    {% if block.settings.banner_image != blank %}
+                      {%- assign banner_sizes = '(max-width: 768px) 100vw, ' | append: block.settings.banner_width | append: 'vw' -%}
+                      {{ block.settings.banner_image | image_url: width: 1000 | image_tag:
+                        class: 'shop-the-look-banner-image',
+                        loading: 'lazy',
+                        sizes: banner_sizes
+                      }}
+                    {% endif %}
+                    
+                    <div class="shop-the-look-banner-content">
+                      {% if block.settings.banner_heading != blank %}
+                        <h3 class="shop-the-look-banner-heading">{{ block.settings.banner_heading }}</h3>
+                      {% endif %}
+                      
+                      {% if block.settings.banner_text != blank %}
+                        <p class="shop-the-look-banner-text">{{ block.settings.banner_text }}</p>
+                      {% endif %}
+                      
+                      {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                        <a href="{{ block.settings.button_link }}" class="shop-the-look-banner-button">
+                          {{ block.settings.button_label }}
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <!-- Products Section -->
+                  <div class="shop-the-look-products">
+                    <div class="swiper-container shop-the-look-swiper-container" data-block-id="{{ block.id }}">
+                      <div class="swiper-wrapper">
+                        {% if block.settings.collection != blank %}
+                          {% assign collection = collections[block.settings.collection] %}
+                          {% for product in collection.products limit: block.settings.products_count %}
+                            <div class="swiper-slide">
+                              {%- render 'product-block',
+                                product: product,
+                                show_secondary_image: block.settings.show_secondary_image
+                              -%}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          {% for i in (1..3) %}
+                            <div class="swiper-slide">
+                              <div class="product-block placeholder-product">
+                                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                <h3>Sản phẩm mẫu {{ i }}</h3>
+                                <p>$99.00</p>
+                              </div>
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                      </div>
+                    </div>
+                    
+                    <div class="shop-the-look-navigation">
+                      <div class="swiper-button-prev shop-the-look-prev" data-block-id="{{ block.id }}">
+                        {% render 'svg-larrow' %}
+                      </div>
+                      <div class="swiper-button-next shop-the-look-next" data-block-id="{{ block.id }}">
+                        {% render 'svg-rarrow' %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
           {% endcase %}
         </div>
       {% endfor %}
@@ -300,6 +370,34 @@
         swiper.update();
       });
     }
+    
+    // Initialize Shop the Look Swipers
+    const shopLookSwipers = document.querySelectorAll('#mousewheel-collection-{{ section.id }} .shop-the-look-swiper-container');
+    shopLookSwipers.forEach(function(swiperContainer) {
+      const blockId = swiperContainer.getAttribute('data-block-id');
+      const nextButton = document.querySelector('.shop-the-look-next[data-block-id="' + blockId + '"]');
+      const prevButton = document.querySelector('.shop-the-look-prev[data-block-id="' + blockId + '"]');
+      
+      const shopLookSwiper = new Swiper(swiperContainer, {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: false,
+        navigation: {
+          nextEl: nextButton,
+          prevEl: prevButton,
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          1024: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          }
+        }
+      });
+    });
   });
 </script>
 
@@ -487,6 +585,78 @@
           "type": "url",
           "id": "button_link",
           "label": "Liên kết nút"
+        }
+      ]
+    },
+    {
+      "type": "shop-the-look",
+      "name": "Shop the Look",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Banner Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Banner image"
+        },
+        {
+          "type": "text",
+          "id": "banner_heading",
+          "label": "Banner heading",
+          "default": "Shop the Look"
+        },
+        {
+          "type": "text",
+          "id": "banner_text",
+          "label": "Banner text",
+          "default": "Discover our latest collection"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "range",
+          "id": "banner_width",
+          "min": 30,
+          "max": 60,
+          "step": 5,
+          "unit": "%",
+          "label": "Banner width",
+          "default": 40
+        },
+        {
+          "type": "header",
+          "content": "Products Settings"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_count",
+          "min": 2,
+          "max": 8,
+          "step": 1,
+          "label": "Number of products to show",
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "show_secondary_image",
+          "label": "Show secondary image on hover",
+          "default": true
         }
       ]
     }
