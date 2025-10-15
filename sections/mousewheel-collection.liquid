@@ -221,19 +221,55 @@
                           {% assign collection = collections[block.settings.collection] %}
                           {% for product in collection.products limit: block.settings.products_count %}
                             <div class="swiper-slide">
-                              {%- render 'product-block',
-                                product: product,
-                                show_secondary_image: block.settings.show_secondary_image
-                              -%}
+                              <div class="shop-the-look-product-card">
+                                <a href="{{ product.url }}" class="product-link">
+                                  <div class="product-image-wrapper">
+                                    {% if product.featured_media %}
+                                      {{ product.featured_media | image_url: width: 400 | image_tag:
+                                        class: 'product-image',
+                                        loading: 'lazy',
+                                        alt: product.title
+                                      }}
+                                      {% if block.settings.show_secondary_image and product.media[1] %}
+                                        {{ product.media[1] | image_url: width: 400 | image_tag:
+                                          class: 'product-image-hover',
+                                          loading: 'lazy',
+                                          alt: product.title
+                                        }}
+                                      {% endif %}
+                                    {% else %}
+                                      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-image' }}
+                                    {% endif %}
+                                  </div>
+                                  
+                                  <div class="product-info">
+                                    <h3 class="product-title">{{ product.title }}</h3>
+                                    <div class="product-price">
+                                      {% if product.compare_at_price > product.price %}
+                                        <span class="price-sale">{{ product.price | money }}</span>
+                                        <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                                      {% else %}
+                                        <span class="price">{{ product.price | money }}</span>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
                             </div>
                           {% endfor %}
                         {% else %}
                           {% for i in (1..3) %}
                             <div class="swiper-slide">
-                              <div class="product-block placeholder-product">
-                                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                                <h3>Sản phẩm mẫu {{ i }}</h3>
-                                <p>$99.00</p>
+                              <div class="shop-the-look-product-card placeholder-product">
+                                <div class="product-image-wrapper">
+                                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-image' }}
+                                </div>
+                                <div class="product-info">
+                                  <h3 class="product-title">Sản phẩm mẫu {{ i }}</h3>
+                                  <div class="product-price">
+                                    <span class="price">$99.00</span>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           {% endfor %}

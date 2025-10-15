@@ -740,6 +740,99 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   height: 16px;
 }
 
+/* Shop the Look Product Styles */
+.shop-the-look-product-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-the-look-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.shop-the-look-product-card .product-link {
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-the-look-product-card .product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.shop-the-look-product-card .product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.shop-the-look-product-card .product-image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shop-the-look-product-card:hover .product-image-hover {
+  opacity: 1;
+}
+
+.shop-the-look-product-card .product-info {
+  padding: 12px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shop-the-look-product-card .product-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+  line-height: 1.4;
+}
+
+.shop-the-look-product-card .product-price {
+  margin: 0;
+}
+
+.shop-the-look-product-card .price,
+.shop-the-look-product-card .price-sale {
+  font-size: 16px;
+  font-weight: 700;
+  color: #e74c3c;
+}
+
+.shop-the-look-product-card .price-compare {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.shop-the-look-product-card.placeholder-product .placeholder-svg {
+  width: 100%;
+  height: 200px;
+  background: #f5f5f5;
+}
+
 .placeholder-product {
   text-align: center;
   padding: 20px;
