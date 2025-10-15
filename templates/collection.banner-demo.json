@@ -48,6 +48,23 @@
             "overlay_opacity": 25
           }
         },
+        "banner_3": {
+          "type": "banner",
+          "settings": {
+            "banner_image": "",
+            "banner_image_mobile": "",
+            "banner_link": "/collections/premium",
+            "open_new_tab": false,
+            "heading": "Premium Collection",
+            "text": "<p>Bộ sưu tập cao cấp với chất liệu và thiết kế đẳng cấp quốc tế</p>",
+            "button_label": "Khám Phá Premium",
+            "button_link": "/collections/luxury",
+            "text_position": "left",
+            "text_color": "#000000",
+            "overlay_color": "#ffffff",
+            "overlay_opacity": 60
+          }
+        },
         "video_1": {
           "type": "video",
           "settings": {
@@ -66,6 +83,7 @@
         "banner_1",
         "image_1", 
         "banner_2",
+        "banner_3",
         "video_1"
       ],
       "settings": {
