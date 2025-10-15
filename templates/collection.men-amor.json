@@ -1,1 +1,90 @@
-{"sections":{"main":{"type":"main-collection","disabled":true,"settings":{"show_collection_content":true,"show_collection_image":true,"description_position":"top","layout":"rows","grid":4,"grid_mobile":"2","products_per_page":24,"featured_addtocart_hide":false,"enable_infinite_scroll":true,"show_vendor":false,"show_filter_counts":false,"show_filter_deadends":true,"ajax_products":true,"filter_mode":"drawer","sticky_sidebar":true,"collapse_filters_method":"over-6","collapse_sort_by":false,"enable_sorting":true,"show_featured_in_sort":true}},"mousewheel_collection_EULzWQ":{"type":"mousewheel-collection","blocks":{"image_k9Yex9":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg","heading":"","text":"","button_label":"","button_link":""}},"video_MYGqcp":{"type":"video","settings":{"video_url":"","video_file":"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/5e5a5ae431a14142b8ec5f72bb452138.mp4","video_cover":"shopify:\/\/shop_images\/SRK02456.jpg","heading":"","text":"","button_label":"","button_link":""}},"image_jt3QnA":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg","heading":"","text":"","button_label":"","button_link":""}}},"block_order":["image_k9Yex9","video_MYGqcp","image_jt3QnA"],"name":"Mousewheel Collection","settings":{"height":"full","show_pagination":false,"show_navigation":false}}},"order":["main","mousewheel_collection_EULzWQ"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "show_collection_content": true,
+        "show_collection_image": true,
+        "description_position": "top",
+        "layout": "rows",
+        "grid": 4,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "featured_addtocart_hide": false,
+        "enable_infinite_scroll": true,
+        "show_vendor": false,
+        "show_filter_counts": false,
+        "show_filter_deadends": true,
+        "ajax_products": true,
+        "filter_mode": "drawer",
+        "sticky_sidebar": true,
+        "collapse_filters_method": "over-6",
+        "collapse_sort_by": false,
+        "enable_sorting": true,
+        "show_featured_in_sort": true
+      }
+    },
+    "mousewheel_collection_EULzWQ": {
+      "type": "mousewheel-collection",
+      "blocks": {
+        "image_k9Yex9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "video_MYGqcp": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/16_9.mov",
+            "video_url": "",
+            "video_cover": "shopify://shop_images/SRK02456.jpg",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "image_jt3QnA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_k9Yex9",
+        "video_MYGqcp",
+        "image_jt3QnA"
+      ],
+      "name": "Mousewheel Collection",
+      "settings": {
+        "height": "full",
+        "show_pagination": true,
+        "show_navigation": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mousewheel_collection_EULzWQ"
+  ]
+}
