@@ -345,3 +345,30 @@ video[poster] {
     100% { transform: translate(-50%, -50%) rotate(0deg); }
   }
 }
+
+/* Header overlap styles */
+.mousewheel-collection.header-overlap-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure content is properly positioned when header overlaps */
+body.header-section-overlap .mousewheel-collection .slide-text-overlay {
+  padding-top: 80px;
+}
+
+/* Adjust for announcement bar */
+body.header-section-overlap.showing-announcement .mousewheel-collection .slide-text-overlay {
+  padding-top: 110px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  body.header-section-overlap .mousewheel-collection .slide-text-overlay {
+    padding-top: 60px;
+  }
+  
+  body.header-section-overlap.showing-announcement .mousewheel-collection .slide-text-overlay {
+    padding-top: 90px;
+  }
+}
