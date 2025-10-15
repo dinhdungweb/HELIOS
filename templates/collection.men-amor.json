@@ -127,6 +127,7 @@
         },
         "video_JfyQKL": {
           "type": "video",
+          "disabled": true,
           "settings": {
             "video_url": "",
             "video_url_mobile": "",
