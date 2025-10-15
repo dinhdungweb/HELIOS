@@ -51,11 +51,38 @@
             "button_label": "Tìm Hiểu Thêm",
             "button_link": "/pages/about"
           }
+        },
+        "slideshow_1": {
+          "type": "slideshow",
+          "settings": {
+            "slide_1_image": "",
+            "slide_1_image_mobile": "",
+            "slide_1_link": "/collections/new-arrivals",
+            "slide_1_heading": "Bộ Sưu Tập Mới",
+            "slide_1_text": "<p>Khám phá những thiết kế mới nhất từ thương hiệu</p>",
+            "slide_1_button_label": "Xem Ngay",
+            "slide_2_image": "",
+            "slide_2_image_mobile": "",
+            "slide_2_link": "/collections/sale",
+            "slide_2_heading": "Ưu Đãi Đặc Biệt",
+            "slide_2_text": "<p>Giảm giá lên đến 50% cho các sản phẩm chọn lọc</p>",
+            "slide_2_button_label": "Mua Ngay",
+            "autoplay": true,
+            "autoplay_speed": 5000,
+            "show_dots": true,
+            "show_arrows": true,
+            "open_new_tab": false,
+            "text_position": "center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
         }
       },
       "block_order": [
         "banner_1",
         "image_1",
+        "slideshow_1",
         "banner_2",
         "banner_3",
         "video_1"

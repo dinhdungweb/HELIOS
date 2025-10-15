@@ -316,6 +316,176 @@
                   </div>
                 </div>
               </div>
+            {% when 'slideshow' %}
+              <div class="slide-content slideshow-slide">
+                <div class="slideshow-container" data-autoplay="{{ block.settings.autoplay }}" data-speed="{{ block.settings.autoplay_speed | times: 1000 }}">
+                  <div class="slideshow-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="slideshow-item active" data-slide="1">
+                      {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
+                      {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
+                      {% assign slide_link_1 = block.settings.slide1_link %}
+                      
+                      {% if desktop_image_1 != blank or mobile_image_1 != blank %}
+                        {% if slide_link_1 != blank %}
+                          <a href="{{ slide_link_1}}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                        {% endif %}
+                        
+                        <div class="slideshow-image-container">
+                          <!-- Desktop Image -->
+                          {% if desktop_image_1 != blank %}
+                            <div class="rimage-outer-wrapper desktop-only">
+                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: desktop_image_1.aspect_ratio | times: 100 }}%">
+                                <img class="rimage__image"
+                                     src="{{ desktop_image_1 | img_url: '1x1' }}"
+                                     data-bgset="{% render 'bgset', image: desktop_image_1 %}"
+                                     data-sizes="auto"
+                                     data-parent-fit="cover"
+                                     alt="{{ desktop_image_1.alt | escape }}">
+                              </div>
+                            </div>
+                          {% endif %}
+                          
+                          <!-- Mobile Image -->
+                          {% if mobile_image_1 != blank %}
+                            <div class="rimage-outer-wrapper mobile-only">
+                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: mobile_image_1.aspect_ratio | times: 100 }}%">
+                                <img class="rimage__image"
+                                     src="{{ mobile_image_1 | img_url: '1x1' }}"
+                                     data-bgset="{% render 'bgset', image: mobile_image_1 %}"
+                                     data-sizes="auto"
+                                     data-parent-fit="cover"
+                                     alt="{{ mobile_image_1.alt | escape }}">
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                        
+                        {% if slide_link_1 != blank %}
+                          </a>
+                        {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 1</div>
+                        </div>
+                      {% endif %}
+                      
+                      <!-- Slide 1 Content -->
+                      {% if block.settings.slide1_heading != blank or block.settings.slide1_text != blank %}
+                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
+                             style="color: {{ block.settings.text_color }};">
+                          <div class="slideshow-overlay" 
+                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+                          <div class="slideshow-text-content">
+                            {% if block.settings.slide1_heading != blank %}
+                              <h2 class="slideshow-heading">{{ block.settings.slide1_heading }}</h2>
+                            {% endif %}
+                            {% if block.settings.slide1_text != blank %}
+                              <div class="slideshow-text">{{ block.settings.slide1_text }}</div>
+                            {% endif %}
+                            {% if block.settings.slide1_button_label != blank and block.settings.slide1_link != blank %}
+                              <a href="{{ block.settings.slide1_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                                {{ block.settings.slide1_button_label }}
+                              </a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slideshow-item" data-slide="2">
+                      {% assign desktop_image_2 = block.settings.slide2_image_desktop %}
+                      {% assign mobile_image_2 = block.settings.slide2_image_mobile | default: block.settings.slide2_image_desktop %}
+                      {% assign slide_link_2 = block.settings.slide2_link %}
+                      
+                      {% if desktop_image_2 != blank or mobile_image_2 != blank %}
+                        {% if slide_link_2 != blank %}
+                          <a href="{{ slide_link_2 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                        {% endif %}
+                        
+                        <div class="slideshow-image-container">
+                          <!-- Desktop Image -->
+                          {% if desktop_image_2 != blank %}
+                            <div class="rimage-outer-wrapper desktop-only">
+                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: desktop_image_2.aspect_ratio | times: 100 }}%">
+                                <img class="rimage__image"
+                                     src="{{ desktop_image_2 | img_url: '1x1' }}"
+                                     data-bgset="{% render 'bgset', image: desktop_image_2 %}"
+                                     data-sizes="auto"
+                                     data-parent-fit="cover"
+                                     alt="{{ desktop_image_2.alt | escape }}">
+                              </div>
+                            </div>
+                          {% endif %}
+                          
+                          <!-- Mobile Image -->
+                          {% if mobile_image_2 != blank %}
+                            <div class="rimage-outer-wrapper mobile-only">
+                              <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: mobile_image_2.aspect_ratio | times: 100 }}%">
+                                <img class="rimage__image"
+                                     src="{{ mobile_image_2 | img_url: '1x1' }}"
+                                     data-bgset="{% render 'bgset', image: mobile_image_2 %}"
+                                     data-sizes="auto"
+                                     data-parent-fit="cover"
+                                     alt="{{ mobile_image_2.alt | escape }}">
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                        
+                        {% if slide_link_2 != blank %}
+                          </a>
+                        {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 2</div>
+                        </div>
+                      {% endif %}
+                      
+                      <!-- Slide 2 Content -->
+                      {% if block.settings.slide2_heading != blank or block.settings.slide2_text != blank %}
+                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
+                             style="color: {{ block.settings.text_color }};">
+                          <div class="slideshow-overlay" 
+                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+                          <div class="slideshow-text-content">
+                            {% if block.settings.slide2_heading != blank %}
+                              <h2 class="slideshow-heading">{{ block.settings.slide2_heading }}</h2>
+                            {% endif %}
+                            {% if block.settings.slide2_text != blank %}
+                              <div class="slideshow-text">{{ block.settings.slide2_text }}</div>
+                            {% endif %}
+                            {% if block.settings.slide2_button_label != blank and block.settings.slide2_link != blank %}
+                              <a href="{{ block.settings.slide2_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                                {{ block.settings.slide2_button_label }}
+                              </a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  
+                  <!-- Navigation Dots -->
+                  {% if block.settings.show_dots %}
+                    <div class="slideshow-dots">
+                      <button class="slideshow-dot active" data-slide="1"></button>
+                      <button class="slideshow-dot" data-slide="2"></button>
+                    </div>
+                  {% endif %}
+                  
+                  <!-- Navigation Arrows -->
+                  {% if block.settings.show_arrows %}
+                    <div class="slideshow-arrows">
+                      <button class="slideshow-arrow slideshow-prev">‹</button>
+                      <button class="slideshow-arrow slideshow-next">›</button>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
           {% endcase %}
         </div>
       {% endfor %}
@@ -434,7 +604,101 @@
         swiper.update();
       });
     }
+    
+    // Initialize slideshows
+    initSlideshows();
   });
+  
+  function initSlideshows() {
+    const slideshows = document.querySelectorAll('#mousewheel-collection-{{ section.id }} .slideshow-container');
+    
+    slideshows.forEach(function(slideshow) {
+      const autoplay = slideshow.dataset.autoplay === 'true';
+      const speed = parseInt(slideshow.dataset.speed) || 5000;
+      const slides = slideshow.querySelectorAll('.slideshow-item');
+      const dots = slideshow.querySelectorAll('.slideshow-dot');
+      const prevBtn = slideshow.querySelector('.slideshow-prev');
+      const nextBtn = slideshow.querySelector('.slideshow-next');
+      
+      let currentSlide = 0;
+      let autoplayInterval;
+      
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach(function(slide, i) {
+          slide.classList.remove('active');
+          if (dots[i]) {
+            dots[i].classList.remove('active');
+          }
+        });
+        
+        // Show current slide
+        if (slides[index]) {
+          slides[index].classList.add('active');
+          if (dots[index]) {
+            dots[index].classList.add('active');
+          }
+        }
+        
+        currentSlide = index;
+      }
+      
+      function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+      }
+      
+      function prevSlide() {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+      }
+      
+      function startAutoplay() {
+        if (autoplay && slides.length > 1) {
+          autoplayInterval = setInterval(nextSlide, speed);
+        }
+      }
+      
+      function stopAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+        }
+      }
+      
+      // Event listeners for dots
+      dots.forEach(function(dot, index) {
+        dot.addEventListener('click', function() {
+          showSlide(index);
+          stopAutoplay();
+          startAutoplay();
+        });
+      });
+      
+      // Event listeners for arrows
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          prevSlide();
+          stopAutoplay();
+          startAutoplay();
+        });
+      }
+      
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          nextSlide();
+          stopAutoplay();
+          startAutoplay();
+        });
+      }
+      
+      // Pause autoplay on hover
+      slideshow.addEventListener('mouseenter', stopAutoplay);
+      slideshow.addEventListener('mouseleave', startAutoplay);
+      
+      // Start autoplay
+      startAutoplay();
+    });
+  }
 </script>
 
 {% schema %}
@@ -787,6 +1051,184 @@
           "default": 30
         }
       ]
+    },
+    {
+      "type": "slideshow",
+      "name": "Slideshow",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Slide 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide1_image_desktop",
+          "label": "Hình ảnh Desktop Slide 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide1_image_mobile",
+          "label": "Hình ảnh Mobile Slide 1",
+          "info": "Nếu không chọn, sẽ sử dụng hình ảnh desktop"
+        },
+        {
+          "type": "url",
+          "id": "slide1_link",
+          "label": "Liên kết Slide 1"
+        },
+        {
+          "type": "text",
+          "id": "slide1_heading",
+          "label": "Tiêu đề Slide 1",
+          "default": "Slide đầu tiên"
+        },
+        {
+          "type": "richtext",
+          "id": "slide1_text",
+          "label": "Nội dung Slide 1",
+          "default": "<p>Mô tả cho slide đầu tiên</p>"
+        },
+        {
+          "type": "text",
+          "id": "slide1_button_label",
+          "label": "Nhãn nút Slide 1",
+          "default": "Xem thêm"
+        },
+        {
+          "type": "header",
+          "content": "Slide 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide2_image_desktop",
+          "label": "Hình ảnh Desktop Slide 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide2_image_mobile",
+          "label": "Hình ảnh Mobile Slide 2",
+          "info": "Nếu không chọn, sẽ sử dụng hình ảnh desktop"
+        },
+        {
+          "type": "url",
+          "id": "slide2_link",
+          "label": "Liên kết Slide 2"
+        },
+        {
+          "type": "text",
+          "id": "slide2_heading",
+          "label": "Tiêu đề Slide 2",
+          "default": "Slide thứ hai"
+        },
+        {
+          "type": "richtext",
+          "id": "slide2_text",
+          "label": "Nội dung Slide 2",
+          "default": "<p>Mô tả cho slide thứ hai</p>"
+        },
+        {
+          "type": "text",
+          "id": "slide2_button_label",
+          "label": "Nhãn nút Slide 2",
+          "default": "Khám phá"
+        },
+        {
+          "type": "header",
+          "content": "Cài đặt Slideshow"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Tự động chuyển slide",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "autoplay_speed",
+          "min": 3,
+          "max": 10,
+          "step": 1,
+          "unit": "s",
+          "label": "Thời gian chuyển slide",
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dots",
+          "label": "Hiển thị chấm điều hướng",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrows",
+          "label": "Hiển thị mũi tên điều hướng",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Mở liên kết trong tab mới",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Vị trí text",
+          "options": [
+            {
+              "value": "center",
+              "label": "Giữa"
+            },
+            {
+              "value": "left",
+              "label": "Trái"
+            },
+            {
+              "value": "right",
+              "label": "Phải"
+            },
+            {
+              "value": "top-left",
+              "label": "Trên trái"
+            },
+            {
+              "value": "top-right",
+              "label": "Trên phải"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Dưới trái"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Dưới phải"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Màu chữ",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Màu overlay",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Độ trong suốt overlay",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 30
+        }
+      ]
     }
   ],
   "presets": [
@@ -801,6 +1243,9 @@
         },
         {
           "type": "banner"
+        },
+        {
+          "type": "slideshow"
         },
         {
           "type": "image"
