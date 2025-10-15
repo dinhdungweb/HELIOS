@@ -675,7 +675,7 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   color: #ffffff;
 }
 
-.shop-the-look-products {
+.shop-the-look-images {
   position: relative;
   height: 100%;
   display: flex;
@@ -694,13 +694,59 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: auto;
+  margin-right: 20px;
 }
 
-.shop-the-look-swiper-container .product-block {
-  max-width: 350px;
+.shop-the-look-image-item {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  width: 250px;
+  height: 300px;
+}
+
+.shop-the-look-image-item:hover {
+  transform: translateY(-5px);
+}
+
+.shop-the-look-image-link {
+  display: block;
   width: 100%;
-  margin: 0 auto;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.shop-the-look-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.shop-the-look-image-item:hover .shop-the-look-slide-image {
+  transform: scale(1.05);
+}
+
+.shop-the-look-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: 20px 15px 15px;
+  color: white;
+}
+
+.shop-the-look-image-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .shop-the-look-navigation {
@@ -740,116 +786,33 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   height: 16px;
 }
 
-/* Shop the Look Product Styles */
-.shop-the-look-product-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
+.placeholder-image {
   display: flex;
   flex-direction: column;
-}
-
-.shop-the-look-product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.shop-the-look-product-card .product-link {
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.shop-the-look-product-card .product-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.shop-the-look-product-card .product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: opacity 0.3s ease;
-}
-
-.shop-the-look-product-card .product-image-hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.shop-the-look-product-card:hover .product-image-hover {
-  opacity: 1;
-}
-
-.shop-the-look-product-card .product-info {
-  padding: 12px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.shop-the-look-product-card .product-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  color: #333;
-  line-height: 1.4;
-}
-
-.shop-the-look-product-card .product-price {
-  margin: 0;
-}
-
-.shop-the-look-product-card .price,
-.shop-the-look-product-card .price-sale {
-  font-size: 16px;
-  font-weight: 700;
-  color: #e74c3c;
-}
-
-.shop-the-look-product-card .price-compare {
-  font-size: 14px;
-  color: #999;
-  text-decoration: line-through;
-  margin-left: 8px;
-}
-
-.shop-the-look-product-card.placeholder-product .placeholder-svg {
-  width: 100%;
-  height: 200px;
-  background: #f5f5f5;
-}
-
-.placeholder-product {
-  text-align: center;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  border: 1px solid #e0e0e0;
+  text-align: center;
+  background: #f5f5f5;
   border-radius: 8px;
-  background: #f9f9f9;
 }
 
-.placeholder-product h3 {
-  margin: 10px 0 5px;
-  font-size: 16px;
+.placeholder-image .placeholder-svg {
+  width: 100%;
+  height: 150px;
+  opacity: 0.3;
 }
 
-.placeholder-product p {
-  margin: 0;
-  font-weight: 600;
+.placeholder-image .shop-the-look-image-overlay {
+  position: static;
+  background: none;
   color: #666;
+  padding: 10px 0 0;
+}
+
+.placeholder-image .shop-the-look-image-title {
+  color: #666;
+  text-shadow: none;
 }
 
 /* Mobile Responsive */
@@ -873,8 +836,9 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
     font-size: 22px;
   }
 
-  .shop-the-look-swiper-container .product-block {
+  .shop-the-look-image-item {
     max-width: 100%;
+    width: 100%;
   }
 
   .shop-the-look-slide {
