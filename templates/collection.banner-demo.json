@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "mousewheel_collection_banner_demo": {
+      "type": "mousewheel-collection",
+      "blocks": {
+        "banner_1": {
+          "type": "banner",
+          "settings": {
+            "banner_image": "",
+            "banner_image_mobile": "",
+            "banner_link": "/collections/new-arrivals",
+            "open_new_tab": false,
+            "heading": "Bộ Sưu Tập Mới",
+            "text": "<p>Khám phá những sản phẩm mới nhất với thiết kế độc đáo và chất lượng cao</p>",
+            "button_label": "Xem Ngay",
+            "button_link": "/collections/featured",
+            "text_position": "center",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "image_1": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "image_mobile": "",
+            "heading": "Thời Trang Cao Cấp",
+            "text": "<p>Phong cách thời trang hiện đại cho người trẻ</p>",
+            "button_label": "Khám Phá",
+            "button_link": "/collections/fashion"
+          }
+        },
+        "banner_2": {
+          "type": "banner",
+          "settings": {
+            "banner_image": "",
+            "banner_image_mobile": "",
+            "banner_link": "/pages/sale",
+            "open_new_tab": true,
+            "heading": "Sale 50%",
+            "text": "<p>Giảm giá lên đến 50% cho tất cả sản phẩm. Cơ hội không thể bỏ lỡ!</p>",
+            "button_label": "Mua Ngay",
+            "button_link": "/collections/sale",
+            "text_position": "bottom-right",
+            "text_color": "#ffffff",
+            "overlay_color": "#ff0000",
+            "overlay_opacity": 25
+          }
+        },
+        "video_1": {
+          "type": "video",
+          "settings": {
+            "video": "",
+            "video_url": "",
+            "video_mobile": "",
+            "video_url_mobile": "",
+            "heading": "Video Giới Thiệu",
+            "text": "<p>Xem video giới thiệu về thương hiệu của chúng tôi</p>",
+            "button_label": "Tìm Hiểu Thêm",
+            "button_link": "/pages/about"
+          }
+        }
+      },
+      "block_order": [
+        "banner_1",
+        "image_1", 
+        "banner_2",
+        "video_1"
+      ],
+      "settings": {
+        "height": "full",
+        "show_pagination": true,
+        "show_navigation": true
+      }
+    }
+  },
+  "order": [
+    "mousewheel_collection_banner_demo"
+  ]
+}

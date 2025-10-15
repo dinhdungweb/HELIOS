@@ -65,110 +65,6 @@
                   </div>
                 {% endif %}
               </div>
-            {% when 'banner_slider' %}
-              <div class="slide-content banner-slider-slide">
-                <div class="banner-slider-container">
-                  <!-- Left Banner -->
-                  <div class="banner-left">
-                    {% assign banner_image = block.settings.banner_image %}
-                    {% assign banner_image_mobile = block.settings.banner_image_mobile | default: block.settings.banner_image %}
-                    
-                    {% if banner_image != blank %}
-                      <div class="banner-image-wrapper">
-                        <!-- Desktop Banner -->
-                        <img 
-                          src="{{ banner_image | img_url: '800x' }}"
-                          alt="{{ banner_image.alt | escape }}"
-                          loading="lazy"
-                          class="banner-image desktop-media"
-                        >
-                        
-                        <!-- Mobile Banner -->
-                        {% if banner_image_mobile != blank and banner_image_mobile != banner_image %}
-                          <img 
-                            src="{{ banner_image_mobile | img_url: '600x' }}"
-                            alt="{{ banner_image_mobile.alt | escape }}"
-                            loading="lazy"
-                            class="banner-image mobile-media"
-                          >
-                        {% endif %}
-                        
-                        {% if block.settings.banner_link != blank %}
-                          <a href="{{ block.settings.banner_link }}" class="banner-link-overlay" aria-label="{{ block.settings.banner_heading | default: 'Banner link' }}"></a>
-                        {% endif %}
-                      </div>
-                    {% endif %}
-                    
-                    {% if block.settings.banner_heading != blank or block.settings.banner_text != blank %}
-                      <div class="banner-content">
-                        {% if block.settings.banner_heading != blank %}
-                          <h3 class="banner-heading">{{ block.settings.banner_heading }}</h3>
-                        {% endif %}
-                        {% if block.settings.banner_text != blank %}
-                          <div class="banner-text">{{ block.settings.banner_text }}</div>
-                        {% endif %}
-                        {% if block.settings.banner_button_label != blank and block.settings.banner_link != blank %}
-                          <a href="{{ block.settings.banner_link }}" class="banner-button">
-                            {{ block.settings.banner_button_label }}
-                          </a>
-                        {% endif %}
-                      </div>
-                    {% endif %}
-                  </div>
-                  
-                  <!-- Right Image Slider -->
-                  <div class="slider-right">
-                    <div class="image-slider-container">
-                      <div class="image-slider swiper">
-                        <div class="swiper-wrapper">
-                          {% for i in (1..6) %}
-                            {% assign image_key = 'image_' | append: i %}
-                            {% assign link_key = 'link_' | append: i %}
-                            {% assign title_key = 'title_' | append: i %}
-                            {% assign slider_image = block.settings[image_key] %}
-                            {% assign slider_link = block.settings[link_key] %}
-                            {% assign slider_title = block.settings[title_key] %}
-                            
-                            {% if slider_image != blank %}
-                              <div class="swiper-slide">
-                                <div class="slider-image-wrapper">
-                                  {% if slider_link != blank %}
-                                    <a href="{{ slider_link }}" class="slider-image-link" {% if slider_title != blank %}aria-label="{{ slider_title }}"{% endif %}>
-                                  {% endif %}
-                                  
-                                  <img 
-                                    src="{{ slider_image | img_url: '600x600' }}"
-                                    alt="{{ slider_image.alt | escape }}"
-                                    loading="lazy"
-                                    class="slider-image"
-                                  >
-                                  
-                                  {% if slider_title != blank %}
-                                    <div class="slider-image-overlay">
-                                      <span class="slider-image-title">{{ slider_title }}</span>
-                                    </div>
-                                  {% endif %}
-                                  
-                                  {% if slider_link != blank %}
-                                    </a>
-                                  {% endif %}
-                                </div>
-                              </div>
-                            {% endif %}
-                          {% endfor %}
-                        </div>
-                        
-                        <!-- Navigation -->
-                        <div class="swiper-button-next slider-nav-next"></div>
-                        <div class="swiper-button-prev slider-nav-prev"></div>
-                        
-                        <!-- Pagination -->
-                        <div class="swiper-pagination slider-pagination"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             {% when 'video' %}
               <div class="slide-content video-slide">
                 {% assign desktop_video = block.settings.video %}
@@ -286,6 +182,71 @@
                   </div>
                 {% endif %}
               </div>
+            {% when 'banner' %}
+              <div class="slide-content banner-slide">
+                {% assign desktop_banner = block.settings.banner_image %}
+                {% assign mobile_banner = block.settings.banner_image_mobile | default: block.settings.banner_image %}
+                {% assign banner_link = block.settings.banner_link %}
+                {% assign open_new_tab = block.settings.open_new_tab %}
+                
+                {% if desktop_banner != blank or mobile_banner != blank %}
+                  <div class="banner-wrapper">
+                    {% if banner_link != blank %}
+                      <a href="{{ banner_link }}" class="banner-link-overlay" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                    {% endif %}
+                    
+                    <!-- Desktop Banner -->
+                    {% if desktop_banner != blank %}
+                      <img 
+                        src="{{ desktop_banner | img_url: 'master' }}"
+                        alt="{{ desktop_banner.alt | escape }}"
+                        loading="lazy"
+                        class="full-width-banner desktop-media"
+                      >
+                    {% endif %}
+                    
+                    <!-- Mobile Banner -->
+                    {% if mobile_banner != blank and mobile_banner != desktop_banner %}
+                      <img 
+                        src="{{ mobile_banner | img_url: 'master' }}"
+                        alt="{{ mobile_banner.alt | escape }}"
+                        loading="lazy"
+                        class="full-width-banner mobile-media"
+                      >
+                    {% endif %}
+                    
+                    {% if banner_link != blank %}
+                      </a>
+                    {% endif %}
+                    
+                    <!-- Overlay with custom positioning and styling -->
+                    {% if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank %}
+                      <div class="banner-text-overlay text-position-{{ block.settings.text_position }}" 
+                           style="--text-color: {{ block.settings.text_color }}; --overlay-color: {{ block.settings.overlay_color }}; --overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};">
+                        <div class="banner-overlay-bg"></div>
+                        <div class="banner-content">
+                          {% if block.settings.heading != blank %}
+                            <h2 class="banner-heading">{{ block.settings.heading }}</h2>
+                          {% endif %}
+                          {% if block.settings.text != blank %}
+                            <div class="banner-text">{{ block.settings.text }}</div>
+                          {% endif %}
+                          {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                            <a href="{{ block.settings.button_link }}" class="banner-button" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                              {{ block.settings.button_label }}
+                            </a>
+                          {% endif %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% else %}
+                  <div class="placeholder-container">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    <div class="placeholder-text">Banner Placeholder</div>
+                  </div>
+                {% endif %}
+              </div>
           {% endcase %}
         </div>
       {% endfor %}
@@ -399,42 +360,6 @@
         }
       }
       
-      // Initialize image sliders for banner_slider blocks
-      const imageSliders = document.querySelectorAll('.image-slider');
-      imageSliders.forEach(function(sliderElement) {
-        new Swiper(sliderElement, {
-          slidesPerView: 1,
-          spaceBetween: 10,
-          loop: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          navigation: {
-            nextEl: sliderElement.querySelector('.slider-nav-next'),
-            prevEl: sliderElement.querySelector('.slider-nav-prev'),
-          },
-          pagination: {
-            el: sliderElement.querySelector('.slider-pagination'),
-            clickable: true,
-          },
-          breakpoints: {
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 15,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            }
-          }
-        });
-      });
-
       // Handle window resize
       window.addEventListener('resize', function() {
         swiper.update();
@@ -631,140 +556,133 @@
       ]
     },
     {
-      "type": "banner_slider",
-      "name": "Banner + Slider",
+      "type": "banner",
+      "name": "Banner",
       "settings": [
         {
           "type": "header",
-          "content": "Banner bên trái"
+          "content": "Hình ảnh Banner Desktop"
         },
         {
           "type": "image_picker",
           "id": "banner_image",
-          "label": "Ảnh banner Desktop"
+          "label": "Hình ảnh Banner Desktop"
+        },
+        {
+          "type": "header",
+          "content": "Hình ảnh Banner Mobile"
         },
         {
           "type": "image_picker",
           "id": "banner_image_mobile",
-          "label": "Ảnh banner Mobile",
-          "info": "Nếu không chọn, sẽ sử dụng ảnh desktop"
+          "label": "Hình ảnh Banner Mobile",
+          "info": "Nếu không chọn, sẽ sử dụng hình ảnh desktop"
         },
         {
-          "type": "text",
-          "id": "banner_heading",
-          "label": "Tiêu đề banner",
-          "default": "Banner Title"
-        },
-        {
-          "type": "richtext",
-          "id": "banner_text",
-          "label": "Nội dung banner",
-          "default": "<p>Mô tả ngắn về banner</p>"
+          "type": "header",
+          "content": "Liên kết Banner"
         },
         {
           "type": "url",
           "id": "banner_link",
-          "label": "Liên kết banner"
+          "label": "Liên kết Banner",
+          "info": "Toàn bộ banner sẽ có thể click được"
         },
         {
-          "type": "text",
-          "id": "banner_button_label",
-          "label": "Nhãn nút banner",
-          "default": "Xem thêm"
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Mở liên kết trong tab mới",
+          "default": false
         },
         {
           "type": "header",
-          "content": "Slider ảnh bên phải"
-        },
-        {
-          "type": "image_picker",
-          "id": "image_1",
-          "label": "Ảnh 1"
-        },
-        {
-          "type": "url",
-          "id": "link_1",
-          "label": "Liên kết ảnh 1"
+          "content": "Nội dung Overlay"
         },
         {
           "type": "text",
-          "id": "title_1",
-          "label": "Tiêu đề ảnh 1"
+          "id": "heading",
+          "label": "Tiêu đề",
+          "default": "Banner Quảng Cáo"
         },
         {
-          "type": "image_picker",
-          "id": "image_2",
-          "label": "Ảnh 2"
-        },
-        {
-          "type": "url",
-          "id": "link_2",
-          "label": "Liên kết ảnh 2"
+          "type": "richtext",
+          "id": "text",
+          "label": "Nội dung",
+          "default": "<p>Mô tả ngắn về banner quảng cáo</p>"
         },
         {
           "type": "text",
-          "id": "title_2",
-          "label": "Tiêu đề ảnh 2"
-        },
-        {
-          "type": "image_picker",
-          "id": "image_3",
-          "label": "Ảnh 3"
+          "id": "button_label",
+          "label": "Nhãn nút",
+          "default": "Xem ngay"
         },
         {
           "type": "url",
-          "id": "link_3",
-          "label": "Liên kết ảnh 3"
+          "id": "button_link",
+          "label": "Liên kết nút",
+          "info": "Nút riêng biệt với liên kết khác banner chính"
         },
         {
-          "type": "text",
-          "id": "title_3",
-          "label": "Tiêu đề ảnh 3"
+          "type": "header",
+          "content": "Tùy chỉnh hiển thị"
         },
         {
-          "type": "image_picker",
-          "id": "image_4",
-          "label": "Ảnh 4"
+          "type": "select",
+          "id": "text_position",
+          "label": "Vị trí text",
+          "options": [
+            {
+              "value": "center",
+              "label": "Giữa"
+            },
+            {
+              "value": "left",
+              "label": "Trái"
+            },
+            {
+              "value": "right",
+              "label": "Phải"
+            },
+            {
+              "value": "top-left",
+              "label": "Trên trái"
+            },
+            {
+              "value": "top-right",
+              "label": "Trên phải"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Dưới trái"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Dưới phải"
+            }
+          ],
+          "default": "center"
         },
         {
-          "type": "url",
-          "id": "link_4",
-          "label": "Liên kết ảnh 4"
+          "type": "color",
+          "id": "text_color",
+          "label": "Màu chữ",
+          "default": "#ffffff"
         },
         {
-          "type": "text",
-          "id": "title_4",
-          "label": "Tiêu đề ảnh 4"
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Màu overlay",
+          "default": "#000000"
         },
         {
-          "type": "image_picker",
-          "id": "image_5",
-          "label": "Ảnh 5"
-        },
-        {
-          "type": "url",
-          "id": "link_5",
-          "label": "Liên kết ảnh 5"
-        },
-        {
-          "type": "text",
-          "id": "title_5",
-          "label": "Tiêu đề ảnh 5"
-        },
-        {
-          "type": "image_picker",
-          "id": "image_6",
-          "label": "Ảnh 6"
-        },
-        {
-          "type": "url",
-          "id": "link_6",
-          "label": "Liên kết ảnh 6"
-        },
-        {
-          "type": "text",
-          "id": "title_6",
-          "label": "Tiêu đề ảnh 6"
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Độ trong suốt overlay",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 30
         }
       ]
     }
@@ -778,6 +696,9 @@
         },
         {
           "type": "video"
+        },
+        {
+          "type": "banner"
         },
         {
           "type": "image"
