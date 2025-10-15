@@ -37,22 +37,24 @@
     "mousewheel_collection_EULzWQ": {
       "type": "mousewheel-collection",
       "blocks": {
-        "image_k9Yex9": {
-          "type": "image",
+        "video_MYGqcp": {
+          "type": "video",
           "settings": {
-            "image": "shopify://shop_images/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg",
+            "video": "shopify://files/videos/16_9.mov",
+            "video_url": "",
+            "video_mobile": "shopify://files/videos/9_16.mov",
+            "video_url_mobile": "",
+            "video_cover": "shopify://shop_images/SRK02456.jpg",
             "heading": "",
             "text": "",
             "button_label": "",
             "button_link": ""
           }
         },
-        "video_MYGqcp": {
-          "type": "video",
+        "image_k9Yex9": {
+          "type": "image",
           "settings": {
-            "video": "shopify://files/videos/16_9.mov",
-            "video_url": "",
-            "video_cover": "shopify://shop_images/SRK02456.jpg",
+            "image": "shopify://shop_images/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg",
             "heading": "",
             "text": "",
             "button_label": "",
@@ -71,8 +73,8 @@
         }
       },
       "block_order": [
-        "image_k9Yex9",
         "video_MYGqcp",
+        "image_k9Yex9",
         "image_jt3QnA"
       ],
       "name": "Mousewheel Collection",
