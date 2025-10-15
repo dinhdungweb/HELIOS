@@ -782,70 +782,7 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 8 -->
-                    <div class="slideshow-item" data-slide="8">
-                      {% assign desktop_image_8 = block.settings.slide8_image_desktop %}
-                      {% assign mobile_image_8 = block.settings.slide8_image_mobile | default: block.settings.slide8_image_desktop %}
-                      {% assign slide_link_8 = block.settings.slide8_link %}
-                      
-                      {% if desktop_image_8 != blank or mobile_image_8 != blank %}
-                        {% if slide_link_8 != blank %}
-                          <a href="{{ slide_link_8 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_8 != blank %}
-                            <img 
-                              src="{{ desktop_image_8 | img_url: 'master' }}"
-                              alt="{{ desktop_image_8.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
-                          {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_8 != blank and mobile_image_8 != desktop_image_8 %}
-                            <img 
-                              src="{{ mobile_image_8 | img_url: 'master' }}"
-                              alt="{{ mobile_image_8.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
-                          {% endif %}
-                        </div>
-                        
-                        {% if slide_link_8 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 8</div>
-                        </div>
-                      {% endif %}
-                      
-                      <!-- Slide 8 Content -->
-                      {% if block.settings.slide8_heading != blank or block.settings.slide8_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide8_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide8_heading }}</h2>
-                            {% endif %}
-                            {% if block.settings.slide8_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide8_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide8_button_label != blank and block.settings.slide8_link != blank %}
-                              <a href="{{ block.settings.slide8_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide8_button_label }}
-                              </a>
-                            {% endif %}
-                          </div>
-                        </div>
-                      {% endif %}
+                    
                     </div>
                   </div>
                   
