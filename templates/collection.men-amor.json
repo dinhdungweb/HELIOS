@@ -75,7 +75,7 @@
             "autoplay": true,
             "autoplay_speed": 5,
             "show_dots": true,
-            "show_arrows": true,
+            "show_arrows": false,
             "open_new_tab": false,
             "text_position": "center",
             "text_color": "#ffffff",
