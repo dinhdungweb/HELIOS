@@ -65,6 +65,110 @@
                   </div>
                 {% endif %}
               </div>
+            {% when 'banner_slider' %}
+              <div class="slide-content banner-slider-slide">
+                <div class="banner-slider-container">
+                  <!-- Left Banner -->
+                  <div class="banner-left">
+                    {% assign banner_image = block.settings.banner_image %}
+                    {% assign banner_image_mobile = block.settings.banner_image_mobile | default: block.settings.banner_image %}
+                    
+                    {% if banner_image != blank %}
+                      <div class="banner-image-wrapper">
+                        <!-- Desktop Banner -->
+                        <img 
+                          src="{{ banner_image | img_url: '800x' }}"
+                          alt="{{ banner_image.alt | escape }}"
+                          loading="lazy"
+                          class="banner-image desktop-media"
+                        >
+                        
+                        <!-- Mobile Banner -->
+                        {% if banner_image_mobile != blank and banner_image_mobile != banner_image %}
+                          <img 
+                            src="{{ banner_image_mobile | img_url: '600x' }}"
+                            alt="{{ banner_image_mobile.alt | escape }}"
+                            loading="lazy"
+                            class="banner-image mobile-media"
+                          >
+                        {% endif %}
+                        
+                        {% if block.settings.banner_link != blank %}
+                          <a href="{{ block.settings.banner_link }}" class="banner-link-overlay" aria-label="{{ block.settings.banner_heading | default: 'Banner link' }}"></a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.banner_heading != blank or block.settings.banner_text != blank %}
+                      <div class="banner-content">
+                        {% if block.settings.banner_heading != blank %}
+                          <h3 class="banner-heading">{{ block.settings.banner_heading }}</h3>
+                        {% endif %}
+                        {% if block.settings.banner_text != blank %}
+                          <div class="banner-text">{{ block.settings.banner_text }}</div>
+                        {% endif %}
+                        {% if block.settings.banner_button_label != blank and block.settings.banner_link != blank %}
+                          <a href="{{ block.settings.banner_link }}" class="banner-button">
+                            {{ block.settings.banner_button_label }}
+                          </a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Right Image Slider -->
+                  <div class="slider-right">
+                    <div class="image-slider-container">
+                      <div class="image-slider swiper">
+                        <div class="swiper-wrapper">
+                          {% for i in (1..6) %}
+                            {% assign image_key = 'image_' | append: i %}
+                            {% assign link_key = 'link_' | append: i %}
+                            {% assign title_key = 'title_' | append: i %}
+                            {% assign slider_image = block.settings[image_key] %}
+                            {% assign slider_link = block.settings[link_key] %}
+                            {% assign slider_title = block.settings[title_key] %}
+                            
+                            {% if slider_image != blank %}
+                              <div class="swiper-slide">
+                                <div class="slider-image-wrapper">
+                                  {% if slider_link != blank %}
+                                    <a href="{{ slider_link }}" class="slider-image-link" {% if slider_title != blank %}aria-label="{{ slider_title }}"{% endif %}>
+                                  {% endif %}
+                                  
+                                  <img 
+                                    src="{{ slider_image | img_url: '600x600' }}"
+                                    alt="{{ slider_image.alt | escape }}"
+                                    loading="lazy"
+                                    class="slider-image"
+                                  >
+                                  
+                                  {% if slider_title != blank %}
+                                    <div class="slider-image-overlay">
+                                      <span class="slider-image-title">{{ slider_title }}</span>
+                                    </div>
+                                  {% endif %}
+                                  
+                                  {% if slider_link != blank %}
+                                    </a>
+                                  {% endif %}
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="swiper-button-next slider-nav-next"></div>
+                        <div class="swiper-button-prev slider-nav-prev"></div>
+                        
+                        <!-- Pagination -->
+                        <div class="swiper-pagination slider-pagination"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             {% when 'video' %}
               <div class="slide-content video-slide">
                 {% assign desktop_video = block.settings.video %}
@@ -182,108 +286,6 @@
                   </div>
                 {% endif %}
               </div>
-            {% when 'shop-the-look' %}
-              <div class="slide-content shop-the-look-slide">
-                <div class="shop-the-look-content" data-banner-width="{{ block.settings.banner_width }}">
-                  <!-- Banner Section -->
-                  <div class="shop-the-look-banner">
-                    {% if block.settings.banner_image != blank %}
-                      {%- assign banner_sizes = '(max-width: 768px) 100vw, ' | append: block.settings.banner_width | append: 'vw' -%}
-                      {{ block.settings.banner_image | image_url: width: 1000 | image_tag:
-                        class: 'shop-the-look-banner-image',
-                        loading: 'lazy',
-                        sizes: banner_sizes
-                      }}
-                    {% endif %}
-                    
-                    <div class="shop-the-look-banner-content">
-                      {% if block.settings.banner_heading != blank %}
-                        <h3 class="shop-the-look-banner-heading">{{ block.settings.banner_heading }}</h3>
-                      {% endif %}
-                      
-                      {% if block.settings.banner_text != blank %}
-                        <p class="shop-the-look-banner-text">{{ block.settings.banner_text }}</p>
-                      {% endif %}
-                      
-                      {% if block.settings.button_label != blank and block.settings.button_link != blank %}
-                        <a href="{{ block.settings.button_link }}" class="shop-the-look-banner-button">
-                          {{ block.settings.button_label }}
-                        </a>
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <!-- Image Slider Section -->
-                  <div class="shop-the-look-images">
-                    <div class="swiper-container shop-the-look-swiper-container" data-block-id="{{ block.id }}">
-                      <div class="swiper-wrapper">
-                        {% for i in (1..6) %}
-                          {% assign image_setting = 'image_' | append: i %}
-                          {% assign link_setting = 'link_' | append: i %}
-                          {% assign title_setting = 'title_' | append: i %}
-                          
-                          {% if block.settings[image_setting] != blank %}
-                            <div class="swiper-slide">
-                              <div class="shop-the-look-image-item">
-                                {% if block.settings[link_setting] != blank %}
-                                  <a href="{{ block.settings[link_setting] }}" class="shop-the-look-image-link">
-                                {% endif %}
-                                
-                                {{ block.settings[image_setting] | image_url: width: 400 | image_tag:
-                                  class: 'shop-the-look-slide-image',
-                                  loading: 'lazy',
-                                  alt: block.settings[title_setting]
-                                }}
-                                
-                                {% if block.settings[title_setting] != blank %}
-                                  <div class="shop-the-look-image-overlay">
-                                    <h4 class="shop-the-look-image-title">{{ block.settings[title_setting] }}</h4>
-                                  </div>
-                                {% endif %}
-                                
-                                {% if block.settings[link_setting] != blank %}
-                                  </a>
-                                {% endif %}
-                              </div>
-                            </div>
-                          {% endif %}
-                        {% endfor %}
-                        
-                        <!-- Placeholder slides if no images are set -->
-                        {% assign has_images = false %}
-                        {% for i in (1..6) %}
-                          {% assign image_setting = 'image_' | append: i %}
-                          {% if block.settings[image_setting] != blank %}
-                            {% assign has_images = true %}
-                            {% break %}
-                          {% endif %}
-                        {% endfor %}
-                        
-                        {% unless has_images %}
-                          {% for i in (1..3) %}
-                            <div class="swiper-slide">
-                              <div class="shop-the-look-image-item placeholder-image">
-                                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                                <div class="shop-the-look-image-overlay">
-                                  <h4 class="shop-the-look-image-title">Hình ảnh {{ i }}</h4>
-                                </div>
-                              </div>
-                            </div>
-                          {% endfor %}
-                        {% endunless %}
-                      </div>
-                      
-                      <!-- Navigation buttons inside swiper container -->
-                      <div class="swiper-button-prev shop-the-look-prev" data-block-id="{{ block.id }}">
-                        {% render 'svg-larrow' %}
-                      </div>
-                      <div class="swiper-button-next shop-the-look-next" data-block-id="{{ block.id }}">
-                        {% render 'svg-rarrow' %}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
           {% endcase %}
         </div>
       {% endfor %}
@@ -397,55 +399,47 @@
         }
       }
       
+      // Initialize image sliders for banner_slider blocks
+      const imageSliders = document.querySelectorAll('.image-slider');
+      imageSliders.forEach(function(sliderElement) {
+        new Swiper(sliderElement, {
+          slidesPerView: 1,
+          spaceBetween: 10,
+          loop: true,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+          },
+          navigation: {
+            nextEl: sliderElement.querySelector('.slider-nav-next'),
+            prevEl: sliderElement.querySelector('.slider-nav-prev'),
+          },
+          pagination: {
+            el: sliderElement.querySelector('.slider-pagination'),
+            clickable: true,
+          },
+          breakpoints: {
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            }
+          }
+        });
+      });
+
       // Handle window resize
       window.addEventListener('resize', function() {
         swiper.update();
       });
     }
-    
-    // Initialize Shop the Look Swipers
-    const shopLookSwipers = document.querySelectorAll('#mousewheel-collection-{{ section.id }} .shop-the-look-swiper-container');
-    shopLookSwipers.forEach(function(swiperContainer) {
-      const blockId = swiperContainer.getAttribute('data-block-id');
-      const nextButton = document.querySelector('.shop-the-look-next[data-block-id="' + blockId + '"]');
-      const prevButton = document.querySelector('.shop-the-look-prev[data-block-id="' + blockId + '"]');
-      
-      // Check if slides exist
-      const slides = swiperContainer.querySelectorAll('.swiper-slide');
-      if (slides.length === 0) {
-        console.log('No slides found for shop-the-look swiper');
-        return;
-      }
-      
-      try {
-        const shopLookSwiper = new Swiper(swiperContainer, {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          loop: false,
-          navigation: {
-            nextEl: nextButton,
-            prevEl: prevButton,
-          },
-          breakpoints: {
-            768: {
-              slidesPerView: Math.min(2, slides.length),
-              spaceBetween: 15,
-            },
-            1024: {
-              slidesPerView: Math.min(3, slides.length),
-              spaceBetween: 20,
-            }
-          },
-          on: {
-            init: function() {
-              console.log('Shop-the-look swiper initialized for block:', blockId);
-            }
-          }
-        });
-      } catch (error) {
-        console.error('Error initializing shop-the-look swiper:', error);
-      }
-    });
   });
 </script>
 
@@ -637,144 +631,140 @@
       ]
     },
     {
-      "type": "shop-the-look",
-      "name": "Shop the Look",
+      "type": "banner_slider",
+      "name": "Banner + Slider",
       "settings": [
         {
           "type": "header",
-          "content": "Banner Settings"
+          "content": "Banner bên trái"
         },
         {
           "type": "image_picker",
           "id": "banner_image",
-          "label": "Banner image"
+          "label": "Ảnh banner Desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_image_mobile",
+          "label": "Ảnh banner Mobile",
+          "info": "Nếu không chọn, sẽ sử dụng ảnh desktop"
         },
         {
           "type": "text",
           "id": "banner_heading",
-          "label": "Banner heading",
-          "default": "Shop the Look"
+          "label": "Tiêu đề banner",
+          "default": "Banner Title"
         },
         {
-          "type": "text",
+          "type": "richtext",
           "id": "banner_text",
-          "label": "Banner text",
-          "default": "Discover our latest collection"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "Shop Now"
+          "label": "Nội dung banner",
+          "default": "<p>Mô tả ngắn về banner</p>"
         },
         {
           "type": "url",
-          "id": "button_link",
-          "label": "Button link"
+          "id": "banner_link",
+          "label": "Liên kết banner"
         },
         {
-          "type": "range",
-          "id": "banner_width",
-          "min": 30,
-          "max": 60,
-          "step": 5,
-          "unit": "%",
-          "label": "Banner width",
-          "default": 40
+          "type": "text",
+          "id": "banner_button_label",
+          "label": "Nhãn nút banner",
+          "default": "Xem thêm"
         },
         {
           "type": "header",
-          "content": "Image Slider Settings"
+          "content": "Slider ảnh bên phải"
         },
         {
           "type": "image_picker",
           "id": "image_1",
-          "label": "Image 1"
-        },
-        {
-          "type": "text",
-          "id": "title_1",
-          "label": "Title 1"
+          "label": "Ảnh 1"
         },
         {
           "type": "url",
           "id": "link_1",
-          "label": "Link 1"
+          "label": "Liên kết ảnh 1"
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Tiêu đề ảnh 1"
         },
         {
           "type": "image_picker",
           "id": "image_2",
-          "label": "Image 2"
-        },
-        {
-          "type": "text",
-          "id": "title_2",
-          "label": "Title 2"
+          "label": "Ảnh 2"
         },
         {
           "type": "url",
           "id": "link_2",
-          "label": "Link 2"
+          "label": "Liên kết ảnh 2"
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Tiêu đề ảnh 2"
         },
         {
           "type": "image_picker",
           "id": "image_3",
-          "label": "Image 3"
-        },
-        {
-          "type": "text",
-          "id": "title_3",
-          "label": "Title 3"
+          "label": "Ảnh 3"
         },
         {
           "type": "url",
           "id": "link_3",
-          "label": "Link 3"
+          "label": "Liên kết ảnh 3"
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Tiêu đề ảnh 3"
         },
         {
           "type": "image_picker",
           "id": "image_4",
-          "label": "Image 4"
-        },
-        {
-          "type": "text",
-          "id": "title_4",
-          "label": "Title 4"
+          "label": "Ảnh 4"
         },
         {
           "type": "url",
           "id": "link_4",
-          "label": "Link 4"
+          "label": "Liên kết ảnh 4"
+        },
+        {
+          "type": "text",
+          "id": "title_4",
+          "label": "Tiêu đề ảnh 4"
         },
         {
           "type": "image_picker",
           "id": "image_5",
-          "label": "Image 5"
-        },
-        {
-          "type": "text",
-          "id": "title_5",
-          "label": "Title 5"
+          "label": "Ảnh 5"
         },
         {
           "type": "url",
           "id": "link_5",
-          "label": "Link 5"
+          "label": "Liên kết ảnh 5"
+        },
+        {
+          "type": "text",
+          "id": "title_5",
+          "label": "Tiêu đề ảnh 5"
         },
         {
           "type": "image_picker",
           "id": "image_6",
-          "label": "Image 6"
-        },
-        {
-          "type": "text",
-          "id": "title_6",
-          "label": "Title 6"
+          "label": "Ảnh 6"
         },
         {
           "type": "url",
           "id": "link_6",
-          "label": "Link 6"
+          "label": "Liên kết ảnh 6"
+        },
+        {
+          "type": "text",
+          "id": "title_6",
+          "label": "Tiêu đề ảnh 6"
         }
       ]
     }
