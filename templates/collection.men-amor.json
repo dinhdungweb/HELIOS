@@ -9,31 +9,6 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-collection",
-      "disabled": true,
-      "settings": {
-        "show_collection_content": true,
-        "show_collection_image": true,
-        "description_position": "top",
-        "layout": "rows",
-        "grid": 4,
-        "grid_mobile": "2",
-        "products_per_page": 24,
-        "featured_addtocart_hide": false,
-        "enable_infinite_scroll": true,
-        "show_vendor": false,
-        "show_filter_counts": false,
-        "show_filter_deadends": true,
-        "ajax_products": true,
-        "filter_mode": "drawer",
-        "sticky_sidebar": true,
-        "collapse_filters_method": "over-6",
-        "collapse_sort_by": false,
-        "enable_sorting": true,
-        "show_featured_in_sort": true
-      }
-    },
     "mousewheel_collection_EULzWQ": {
       "type": "mousewheel-collection",
       "blocks": {
@@ -60,41 +35,11 @@
             "button_label": "",
             "button_link": ""
           }
-        },
-        "shop_the_look_BQhijL": {
-          "type": "shop-the-look",
-          "settings": {
-            "banner_image": "shopify://shop_images/SRK02892.jpg",
-            "banner_heading": "Shop the Look",
-            "banner_text": "Discover our latest collection",
-            "button_label": "Shop Now",
-            "button_link": "",
-            "banner_width": 55,
-            "image_1": "shopify://shop_images/men-armor-helios-black-silver_2.jpg",
-            "title_1": "",
-            "link_1": "",
-            "image_2": "shopify://shop_images/ao5.jpg",
-            "title_2": "",
-            "link_2": "",
-            "image_3": "shopify://shop_images/SRK02892.jpg",
-            "title_3": "",
-            "link_3": "",
-            "image_4": "shopify://shop_images/2_e067384f-3fab-4565-b9e9-567a7a7d74b6.jpg",
-            "title_4": "",
-            "link_4": "",
-            "image_5": "shopify://shop_images/3_c2a395ad-2305-44bd-b8bc-452b0d80b0db.jpg",
-            "title_5": "",
-            "link_5": "",
-            "image_6": "shopify://shop_images/z7104844960919_82f3852d4e54375176c13cd2d5ee259e_4bf84b0b-17b5-47a4-b67f-b508f451643c.jpg",
-            "title_6": "",
-            "link_6": ""
-          }
         }
       },
       "block_order": [
         "video_MYGqcp",
-        "image_k9Yex9",
-        "shop_the_look_BQhijL"
+        "image_k9Yex9"
       ],
       "name": "Mousewheel Collection",
       "settings": {
@@ -105,7 +50,6 @@
     }
   },
   "order": [
-    "main",
     "mousewheel_collection_EULzWQ"
   ]
 }
