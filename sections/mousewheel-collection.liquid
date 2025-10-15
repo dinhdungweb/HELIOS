@@ -183,69 +183,138 @@
                 {% endif %}
               </div>
             {% when 'banner' %}
-              <div class="slide-content banner-slide">
-                {% assign desktop_banner = block.settings.banner_image %}
-                {% assign mobile_banner = block.settings.banner_image_mobile | default: block.settings.banner_image %}
-                {% assign banner_link = block.settings.banner_link %}
+              <div class="slide-content dual-banner-slide">
                 {% assign open_new_tab = block.settings.open_new_tab %}
                 
-                {% if desktop_banner != blank or mobile_banner != blank %}
-                  <div class="banner-wrapper">
-                    {% if banner_link != blank %}
-                      <a href="{{ banner_link }}" class="banner-link-overlay" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                    {% endif %}
+                <div class="dual-banner-wrapper">
+                  <!-- Left Banner -->
+                  <div class="banner-half banner-left">
+                    {% assign desktop_banner_left = block.settings.banner_image_left %}
+                    {% assign mobile_banner_left = block.settings.banner_image_left_mobile | default: block.settings.banner_image_left %}
+                    {% assign banner_link_left = block.settings.banner_link_left %}
                     
-                    <!-- Desktop Banner -->
-                    {% if desktop_banner != blank %}
-                      <img 
-                        src="{{ desktop_banner | img_url: 'master' }}"
-                        alt="{{ desktop_banner.alt | escape }}"
-                        loading="lazy"
-                        class="full-width-banner desktop-media"
-                      >
-                    {% endif %}
-                    
-                    <!-- Mobile Banner -->
-                    {% if mobile_banner != blank and mobile_banner != desktop_banner %}
-                      <img 
-                        src="{{ mobile_banner | img_url: 'master' }}"
-                        alt="{{ mobile_banner.alt | escape }}"
-                        loading="lazy"
-                        class="full-width-banner mobile-media"
-                      >
-                    {% endif %}
-                    
-                    {% if banner_link != blank %}
-                      </a>
-                    {% endif %}
-                    
-                    <!-- Overlay with custom positioning and styling -->
-                    {% if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank %}
-                      <div class="banner-text-overlay text-position-{{ block.settings.text_position }}" 
-                           style="--text-color: {{ block.settings.text_color }}; --overlay-color: {{ block.settings.overlay_color }}; --overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};">
-                        <div class="banner-overlay-bg"></div>
-                        <div class="banner-content">
-                          {% if block.settings.heading != blank %}
-                            <h2 class="banner-heading">{{ block.settings.heading }}</h2>
-                          {% endif %}
-                          {% if block.settings.text != blank %}
-                            <div class="banner-text">{{ block.settings.text }}</div>
-                          {% endif %}
-                          {% if block.settings.button_label != blank and block.settings.button_link != blank %}
-                            <a href="{{ block.settings.button_link }}" class="banner-button" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                              {{ block.settings.button_label }}
-                            </a>
-                          {% endif %}
-                        </div>
+                    {% if desktop_banner_left != blank or mobile_banner_left != blank %}
+                      <div class="banner-wrapper">
+                        {% if banner_link_left != blank %}
+                          <a href="{{ banner_link_left }}" class="banner-link-overlay" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                        {% endif %}
+                        
+                        <!-- Desktop Banner Left -->
+                        {% if desktop_banner_left != blank %}
+                          <img 
+                            src="{{ desktop_banner_left | img_url: 'master' }}"
+                            alt="{{ desktop_banner_left.alt | escape }}"
+                            loading="lazy"
+                            class="full-width-banner desktop-media"
+                          >
+                        {% endif %}
+                        
+                        <!-- Mobile Banner Left -->
+                        {% if mobile_banner_left != blank and mobile_banner_left != desktop_banner_left %}
+                          <img 
+                            src="{{ mobile_banner_left | img_url: 'master' }}"
+                            alt="{{ mobile_banner_left.alt | escape }}"
+                            loading="lazy"
+                            class="full-width-banner mobile-media"
+                          >
+                        {% endif %}
+                        
+                        {% if banner_link_left != blank %}
+                          </a>
+                        {% endif %}
+                        
+                        <!-- Left Banner Overlay -->
+                        {% if block.settings.heading_left != blank or block.settings.text_left != blank or block.settings.button_label_left != blank %}
+                          <div class="banner-text-overlay text-position-center">
+                            <div class="banner-overlay-bg"></div>
+                            <div class="banner-content">
+                              {% if block.settings.heading_left != blank %}
+                                <h2 class="banner-heading">{{ block.settings.heading_left }}</h2>
+                              {% endif %}
+                              {% if block.settings.text_left != blank %}
+                                <div class="banner-text">{{ block.settings.text_left }}</div>
+                              {% endif %}
+                              {% if block.settings.button_label_left != blank and block.settings.button_link_left != blank %}
+                                <a href="{{ block.settings.button_link_left }}" class="banner-button" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                                  {{ block.settings.button_label_left }}
+                                </a>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% else %}
+                      <div class="placeholder-container">
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                        <div class="placeholder-text">Banner Trái</div>
                       </div>
                     {% endif %}
                   </div>
-                {% else %}
-                  <div class="placeholder-container">
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    <div class="placeholder-text">Banner Placeholder</div>
+                  
+                  <!-- Right Banner -->
+                  <div class="banner-half banner-right">
+                    {% assign desktop_banner_right = block.settings.banner_image_right %}
+                    {% assign mobile_banner_right = block.settings.banner_image_right_mobile | default: block.settings.banner_image_right %}
+                    {% assign banner_link_right = block.settings.banner_link_right %}
+                    
+                    {% if desktop_banner_right != blank or mobile_banner_right != blank %}
+                      <div class="banner-wrapper">
+                        {% if banner_link_right != blank %}
+                          <a href="{{ banner_link_right }}" class="banner-link-overlay" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                        {% endif %}
+                        
+                        <!-- Desktop Banner Right -->
+                        {% if desktop_banner_right != blank %}
+                          <img 
+                            src="{{ desktop_banner_right | img_url: 'master' }}"
+                            alt="{{ desktop_banner_right.alt | escape }}"
+                            loading="lazy"
+                            class="full-width-banner desktop-media"
+                          >
+                        {% endif %}
+                        
+                        <!-- Mobile Banner Right -->
+                        {% if mobile_banner_right != blank and mobile_banner_right != desktop_banner_right %}
+                          <img 
+                            src="{{ mobile_banner_right | img_url: 'master' }}"
+                            alt="{{ mobile_banner_right.alt | escape }}"
+                            loading="lazy"
+                            class="full-width-banner mobile-media"
+                          >
+                        {% endif %}
+                        
+                        {% if banner_link_right != blank %}
+                          </a>
+                        {% endif %}
+                        
+                        <!-- Right Banner Overlay -->
+                        {% if block.settings.heading_right != blank or block.settings.text_right != blank or block.settings.button_label_right != blank %}
+                          <div class="banner-text-overlay text-position-center">
+                            <div class="banner-overlay-bg"></div>
+                            <div class="banner-content">
+                              {% if block.settings.heading_right != blank %}
+                                <h2 class="banner-heading">{{ block.settings.heading_right }}</h2>
+                              {% endif %}
+                              {% if block.settings.text_right != blank %}
+                                <div class="banner-text">{{ block.settings.text_right }}</div>
+                              {% endif %}
+                              {% if block.settings.button_label_right != blank and block.settings.button_link_right != blank %}
+                                <a href="{{ block.settings.button_link_right }}" class="banner-button" {% if open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                                  {{ block.settings.button_label_right }}
+                                </a>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% else %}
+                      <div class="placeholder-container">
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                        <div class="placeholder-text">Banner Phải</div>
+                      </div>
+                    {% endif %}
                   </div>
-                {% endif %}
+                </div>
               </div>
           {% endcase %}
         </div>
@@ -557,70 +626,103 @@
     },
     {
       "type": "banner",
-      "name": "Banner",
+      "name": "Banner Đôi",
       "settings": [
         {
           "type": "header",
-          "content": "Hình ảnh Banner Desktop"
+          "content": "Banner Trái"
         },
         {
           "type": "image_picker",
-          "id": "banner_image",
-          "label": "Hình ảnh Banner Desktop"
-        },
-        {
-          "type": "header",
-          "content": "Hình ảnh Banner Mobile"
+          "id": "banner_image_left",
+          "label": "Hình ảnh Banner Trái (Desktop)"
         },
         {
           "type": "image_picker",
-          "id": "banner_image_mobile",
-          "label": "Hình ảnh Banner Mobile",
+          "id": "banner_image_left_mobile",
+          "label": "Hình ảnh Banner Trái (Mobile)",
           "info": "Nếu không chọn, sẽ sử dụng hình ảnh desktop"
         },
         {
-          "type": "header",
-          "content": "Liên kết Banner"
+          "type": "url",
+          "id": "banner_link_left",
+          "label": "Liên kết Banner Trái"
+        },
+        {
+          "type": "text",
+          "id": "heading_left",
+          "label": "Tiêu đề Banner Trái",
+          "default": "Banner Trái"
+        },
+        {
+          "type": "richtext",
+          "id": "text_left",
+          "label": "Nội dung Banner Trái",
+          "default": "<p>Mô tả banner bên trái</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label_left",
+          "label": "Nhãn nút Banner Trái",
+          "default": "Xem ngay"
         },
         {
           "type": "url",
-          "id": "banner_link",
-          "label": "Liên kết Banner",
-          "info": "Toàn bộ banner sẽ có thể click được"
+          "id": "button_link_left",
+          "label": "Liên kết nút Banner Trái"
+        },
+        {
+          "type": "header",
+          "content": "Banner Phải"
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_image_right",
+          "label": "Hình ảnh Banner Phải (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_image_right_mobile",
+          "label": "Hình ảnh Banner Phải (Mobile)",
+          "info": "Nếu không chọn, sẽ sử dụng hình ảnh desktop"
+        },
+        {
+          "type": "url",
+          "id": "banner_link_right",
+          "label": "Liên kết Banner Phải"
+        },
+        {
+          "type": "text",
+          "id": "heading_right",
+          "label": "Tiêu đề Banner Phải",
+          "default": "Banner Phải"
+        },
+        {
+          "type": "richtext",
+          "id": "text_right",
+          "label": "Nội dung Banner Phải",
+          "default": "<p>Mô tả banner bên phải</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label_right",
+          "label": "Nhãn nút Banner Phải",
+          "default": "Xem ngay"
+        },
+        {
+          "type": "url",
+          "id": "button_link_right",
+          "label": "Liên kết nút Banner Phải"
+        },
+        {
+          "type": "header",
+          "content": "Cài đặt chung"
         },
         {
           "type": "checkbox",
           "id": "open_new_tab",
           "label": "Mở liên kết trong tab mới",
           "default": false
-        },
-        {
-          "type": "header",
-          "content": "Nội dung Overlay"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Tiêu đề",
-          "default": "Banner Quảng Cáo"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Nội dung",
-          "default": "<p>Mô tả ngắn về banner quảng cáo</p>"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Nhãn nút",
-          "default": "Xem ngay"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Liên kết nút",
-          "info": "Nút riêng biệt với liên kết khác banner chính"
         },
         {
           "type": "header",

@@ -840,3 +840,239 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
     transform: none;
   }
 }
+
+/* ===== DUAL BANNER STYLES ===== */
+
+/* Dual Banner Container */
+.dual-banner-wrapper {
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
+}
+
+.banner-half {
+  flex: 1;
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.banner-half .banner-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.banner-half .full-width-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.banner-half:hover .full-width-banner {
+  transform: scale(1.05);
+}
+
+/* Dual Banner Text Overlay */
+.banner-half .banner-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 90%;
+  z-index: 3;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.banner-half .banner-text-overlay .banner-button {
+  pointer-events: auto;
+}
+
+.banner-half .banner-overlay-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.banner-half .banner-content {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+}
+
+.banner-half .banner-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.banner-half .banner-text {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.banner-half .banner-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.banner-half .banner-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Dual Banner Placeholder */
+.banner-half .placeholder-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f5f5f5;
+  border: 2px dashed #cccccc;
+  border-radius: 8px;
+}
+
+.banner-half .placeholder-svg {
+  width: 60px;
+  height: 60px;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.banner-half .placeholder-text {
+  color: #666666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Dual Banner Animation */
+.dual-banner-slide .banner-content {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: dualBannerFadeIn 0.8s ease-out 0.3s forwards;
+}
+
+.banner-left .banner-content {
+  animation-delay: 0.2s;
+}
+
+.banner-right .banner-content {
+  animation-delay: 0.4s;
+}
+
+@keyframes dualBannerFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dual Banner Responsive */
+@media (max-width: 768px) {
+  .dual-banner-wrapper {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .banner-half {
+    min-height: 250px;
+  }
+  
+  .banner-half .banner-content {
+    padding: 1rem;
+  }
+  
+  .banner-half .banner-heading {
+    font-size: 1.25rem;
+  }
+  
+  .banner-half .banner-text {
+    font-size: 0.85rem;
+  }
+  
+  .banner-half .banner-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dual-banner-wrapper {
+    gap: 0.5rem;
+  }
+  
+  .banner-half {
+    min-height: 200px;
+  }
+  
+  .banner-half .banner-content {
+    padding: 0.75rem;
+  }
+  
+  .banner-half .banner-heading {
+    font-size: 1.1rem;
+  }
+  
+  .banner-half .banner-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .banner-half .banner-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Dual Banner Accessibility */
+.banner-half .banner-link-overlay:focus {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Support for Dual Banner */
+@media (prefers-reduced-motion: reduce) {
+  .dual-banner-slide .banner-content {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .banner-half .banner-button {
+    transition: none;
+  }
+  
+  .banner-half .banner-button:hover {
+    transform: none;
+  }
+  
+  .banner-half:hover .full-width-banner {
+    transform: none;
+  }
+}
