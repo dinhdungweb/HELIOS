@@ -70,9 +70,20 @@
             "button_label": "Shop Now",
             "button_link": "",
             "banner_width": 55,
-            "collection": "men-amor",
-            "products_count": 2,
-            "show_secondary_image": true
+            "image_1": "shopify://shop_images/men-armor-helios-black-silver_2.jpg",
+            "title_1": "",
+            "link_1": "",
+            "image_2": "shopify://shop_images/ao5.jpg",
+            "title_2": "",
+            "link_2": "",
+            "title_3": "",
+            "link_3": "",
+            "title_4": "",
+            "link_4": "",
+            "title_5": "",
+            "link_5": "",
+            "title_6": "",
+            "link_6": ""
           }
         }
       },
