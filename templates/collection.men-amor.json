@@ -71,12 +71,27 @@
             "button_label": "",
             "button_link": ""
           }
+        },
+        "shop_the_look_BQhijL": {
+          "type": "shop-the-look",
+          "settings": {
+            "banner_image": "shopify://shop_images/SRK02892.jpg",
+            "banner_heading": "Shop the Look",
+            "banner_text": "Discover our latest collection",
+            "button_label": "Shop Now",
+            "button_link": "",
+            "banner_width": 40,
+            "collection": "men-amor",
+            "products_count": 4,
+            "show_secondary_image": true
+          }
         }
       },
       "block_order": [
         "video_MYGqcp",
         "image_k9Yex9",
-        "image_jt3QnA"
+        "image_jt3QnA",
+        "shop_the_look_BQhijL"
       ],
       "name": "Mousewheel Collection",
       "settings": {
