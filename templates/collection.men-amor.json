@@ -35,11 +35,37 @@
             "button_label": "",
             "button_link": ""
           }
+        },
+        "banner_slider_X3Kirb": {
+          "type": "banner_slider",
+          "settings": {
+            "banner_image": "shopify://shop_images/SRK02892.jpg",
+            "banner_image_mobile": "shopify://shop_images/SRK02892.jpg",
+            "banner_heading": "Banner Title",
+            "banner_text": "<p>Mô tả ngắn về banner</p>",
+            "banner_link": "",
+            "banner_button_label": "Xem thêm",
+            "image_1": "shopify://shop_images/men-armor-helios-black-silver_2.jpg",
+            "link_1": "",
+            "title_1": "",
+            "image_2": "shopify://shop_images/ao5.jpg",
+            "link_2": "",
+            "title_2": "",
+            "link_3": "",
+            "title_3": "",
+            "link_4": "",
+            "title_4": "",
+            "link_5": "",
+            "title_5": "",
+            "link_6": "",
+            "title_6": ""
+          }
         }
       },
       "block_order": [
         "video_MYGqcp",
-        "image_k9Yex9"
+        "image_k9Yex9",
+        "banner_slider_X3Kirb"
       ],
       "name": "Mousewheel Collection",
       "settings": {
