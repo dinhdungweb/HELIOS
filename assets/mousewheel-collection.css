@@ -486,23 +486,35 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   object-fit: cover;
 }
 
-/* Additional mobile video optimizations */
-@media (max-width: 768px) and (orientation: portrait) {
-  .video-wrapper {
-    width: 100vw;
-    height: 100vh;
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+  .video-wrapper,
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
     position: relative;
+    overflow: hidden;
   }
   
-  .full-width-video {
-    width: 100vw !important;
-    height: 100vh !important;
+  .full-width-video,
+  .full-width-image {
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover;
     object-position: center;
+    display: block;
   }
   
   iframe.full-width-video {
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+  }
+  
+  /* Ensure images don't overflow on mobile */
+  .mousewheel-collection img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
