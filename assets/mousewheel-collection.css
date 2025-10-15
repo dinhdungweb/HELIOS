@@ -9,6 +9,17 @@
 
 .mousewheel-collection[data-height="full"] {
   height: 100vh;
+  min-height: 100vh;
+}
+
+/* Mobile-specific full height fix */
+@media (max-width: 768px) {
+  .mousewheel-collection[data-height="full"] {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for modern browsers */
+    min-height: -webkit-fill-available; /* Safari fallback */
+    min-height: 100vh;
+  }
 }
 
 .mousewheel-collection[data-height="large"] {
@@ -501,6 +512,18 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
 @media (max-width: 768px) {
   .mousewheel-collection {
     overflow: hidden;
+  }
+  
+  /* Special handling for full screen on mobile */
+  .mousewheel-collection[data-height="full"] {
+    max-height: 100vh;
+    max-height: 100dvh;
+    position: relative;
+  }
+  
+  .mousewheel-collection[data-height="full"] .mousewheel-swiper-container {
+    max-height: 100vh;
+    max-height: 100dvh;
   }
   
   .video-wrapper,
