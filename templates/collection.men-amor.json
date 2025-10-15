@@ -80,7 +80,7 @@
       ],
       "name": "Mousewheel Collection",
       "settings": {
-        "height": "full",
+        "height": "adapt",
         "show_pagination": false,
         "show_navigation": false
       }
