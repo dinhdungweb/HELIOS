@@ -272,9 +272,8 @@
                           {% endfor %}
                         {% endunless %}
                       </div>
-                    </div>
-                    
-                    <div class="shop-the-look-navigation">
+                      
+                      <!-- Navigation buttons inside swiper container -->
                       <div class="swiper-button-prev shop-the-look-prev" data-block-id="{{ block.id }}">
                         {% render 'svg-larrow' %}
                       </div>
@@ -411,25 +410,41 @@
       const nextButton = document.querySelector('.shop-the-look-next[data-block-id="' + blockId + '"]');
       const prevButton = document.querySelector('.shop-the-look-prev[data-block-id="' + blockId + '"]');
       
-      const shopLookSwiper = new Swiper(swiperContainer, {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: false,
-        navigation: {
-          nextEl: nextButton,
-          prevEl: prevButton,
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 15,
+      // Check if slides exist
+      const slides = swiperContainer.querySelectorAll('.swiper-slide');
+      if (slides.length === 0) {
+        console.log('No slides found for shop-the-look swiper');
+        return;
+      }
+      
+      try {
+        const shopLookSwiper = new Swiper(swiperContainer, {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: false,
+          navigation: {
+            nextEl: nextButton,
+            prevEl: prevButton,
           },
-          1024: {
-            slidesPerView: 2,
-            spaceBetween: 20,
+          breakpoints: {
+            768: {
+              slidesPerView: Math.min(2, slides.length),
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: Math.min(3, slides.length),
+              spaceBetween: 20,
+            }
+          },
+          on: {
+            init: function() {
+              console.log('Shop-the-look swiper initialized for block:', blockId);
+            }
           }
-        }
-      });
+        });
+      } catch (error) {
+        console.error('Error initializing shop-the-look swiper:', error);
+      }
     });
   });
 </script>

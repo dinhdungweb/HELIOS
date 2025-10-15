@@ -749,15 +749,11 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.shop-the-look-navigation {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 25px;
-}
-
 .shop-the-look-prev,
 .shop-the-look-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   background: #ffffff;
@@ -770,6 +766,15 @@ body.header-section-overlap.showing-announcement .mousewheel-collection .slide-t
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 10;
+}
+
+.shop-the-look-prev {
+  left: -22px;
+}
+
+.shop-the-look-next {
+  right: -22px;
 }
 
 .shop-the-look-prev:hover,
