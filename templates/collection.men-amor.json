@@ -65,6 +65,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/z7104827890858_82e4c224e83b5b520e225da825bbb57a.jpg",
+            "image_mobile": "shopify://shop_images/SRK02159.jpg",
             "heading": "",
             "text": "",
             "button_label": "",
