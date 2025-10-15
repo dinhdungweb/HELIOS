@@ -84,53 +84,10 @@
         "show_pagination": false,
         "show_navigation": false
       }
-    },
-    "shop_the_look_banner_ngQbce": {
-      "type": "shop-the-look-banner",
-      "blocks": {
-        "product_jCckUH": {
-          "type": "product",
-          "settings": {
-            "product": "aegis-chrysaber-helios-silver"
-          }
-        },
-        "product_jKTpWG": {
-          "type": "product",
-          "settings": {
-            "product": "amoris-helios-silver"
-          }
-        },
-        "product_qaMWqr": {
-          "type": "product",
-          "settings": {
-            "product": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_jCckUH",
-        "product_jKTpWG",
-        "product_qaMWqr"
-      ],
-      "name": "Shop the look banner",
-      "settings": {
-        "title": "",
-        "subtitle": "",
-        "banner_image": "shopify://shop_images/SRK02892.jpg",
-        "banner_heading": "",
-        "banner_text": "",
-        "button_label": "",
-        "button_link": "",
-        "banner_width": 50,
-        "show_secondary_image": true,
-        "padding_top": "0",
-        "padding_bottom": "0"
-      }
     }
   },
   "order": [
     "main",
-    "mousewheel_collection_EULzWQ",
-    "shop_the_look_banner_ngQbce"
+    "mousewheel_collection_EULzWQ"
   ]
 }
