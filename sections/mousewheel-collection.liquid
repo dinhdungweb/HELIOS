@@ -63,7 +63,7 @@
                 </div>
               </div>
             {% endif %}
-            {% when 'video' %}
+          {% when 'video' %}
               {% assign desktop_video = block.settings.video %}
               {% assign mobile_video = block.settings.video_mobile | default: block.settings.video %}
               {% assign desktop_video_url = block.settings.video_url %}
@@ -184,7 +184,7 @@
                   </div>
                 </div>
               {% endif %}
-            {% when 'banner' %}
+          {% when 'banner' %}
               {% assign desktop_banner_left = block.settings.banner_image_left %}
               {% assign mobile_banner_left = block.settings.banner_image_left_mobile | default: block.settings.banner_image_left %}
               {% assign desktop_banner_right = block.settings.banner_image_right %}
@@ -322,7 +322,7 @@
                   </div>
                 </div>
               {% endif %}
-            {% when 'slideshow' %}
+          {% when 'slideshow' %}
               {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
               {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
               {% assign desktop_image_2 = block.settings.slide2_image_desktop %}
