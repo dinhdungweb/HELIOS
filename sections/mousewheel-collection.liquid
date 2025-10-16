@@ -14,12 +14,13 @@
   <div class="mousewheel-swiper-container swiper">
     <div class="swiper-wrapper">
       {% for block in section.blocks %}
-        <div class="swiper-slide" {{ block.shopify_attributes }}>
-          {% case block.type %}
-            {% when 'image' %}
-              <div class="slide-content image-slide">
-                {% assign desktop_image = block.settings.image %}
-                {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+        {% case block.type %}
+          {% when 'image' %}
+            {% assign desktop_image = block.settings.image %}
+            {% assign mobile_image = block.settings.image_mobile | default: block.settings.image %}
+            {% if desktop_image != blank or mobile_image != blank %}
+              <div class="swiper-slide" {{ block.shopify_attributes }}>
+                <div class="slide-content image-slide">
                 
                 {% if desktop_image != blank or mobile_image != blank %}
                   <div class="image-wrapper">
@@ -59,18 +60,17 @@
                       </div>
                     {% endif %}
                   </div>
-                {% else %}
-                  <div class="placeholder-container">
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                  </div>
-                {% endif %}
+                </div>
               </div>
+            {% endif %}
             {% when 'video' %}
-              <div class="slide-content video-slide">
-                {% assign desktop_video = block.settings.video %}
-                {% assign mobile_video = block.settings.video_mobile | default: block.settings.video %}
-                {% assign desktop_video_url = block.settings.video_url %}
-                {% assign mobile_video_url = block.settings.video_url_mobile | default: block.settings.video_url %}
+              {% assign desktop_video = block.settings.video %}
+              {% assign mobile_video = block.settings.video_mobile | default: block.settings.video %}
+              {% assign desktop_video_url = block.settings.video_url %}
+              {% assign mobile_video_url = block.settings.video_url_mobile | default: block.settings.video_url %}
+              {% if desktop_video != blank or mobile_video != blank or desktop_video_url != blank or mobile_video_url != blank %}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                  <div class="slide-content video-slide">
                 
                 <!-- Desktop Video -->
                 <div class="desktop-media">
@@ -181,17 +181,23 @@
                     {% endif %}
                   </div>
                 {% endif %}
-              </div>
+                  </div>
+                </div>
+              {% endif %}
             {% when 'banner' %}
-              <div class="slide-content dual-banner-slide">
-                {% assign open_new_tab = block.settings.open_new_tab %}
-                
-                <div class="dual-banner-wrapper">
-                  <!-- Left Banner -->
-                  <div class="banner-half banner-left">
-                    {% assign desktop_banner_left = block.settings.banner_image_left %}
-                    {% assign mobile_banner_left = block.settings.banner_image_left_mobile | default: block.settings.banner_image_left %}
-                    {% assign banner_link_left = block.settings.banner_link_left %}
+              {% assign desktop_banner_left = block.settings.banner_image_left %}
+              {% assign mobile_banner_left = block.settings.banner_image_left_mobile | default: block.settings.banner_image_left %}
+              {% assign desktop_banner_right = block.settings.banner_image_right %}
+              {% assign mobile_banner_right = block.settings.banner_image_right_mobile | default: block.settings.banner_image_right %}
+              {% if desktop_banner_left != blank or mobile_banner_left != blank or desktop_banner_right != blank or mobile_banner_right != blank %}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                  <div class="slide-content dual-banner-slide">
+                    {% assign open_new_tab = block.settings.open_new_tab %}
+                    
+                    <div class="dual-banner-wrapper">
+                      <!-- Left Banner -->
+                      <div class="banner-half banner-left">
+                        {% assign banner_link_left = block.settings.banner_link_left %}
                     
                     {% if desktop_banner_left != blank or mobile_banner_left != blank %}
                       <div class="banner-wrapper">
@@ -251,11 +257,9 @@
                     {% endif %}
                   </div>
                   
-                  <!-- Right Banner -->
-                  <div class="banner-half banner-right">
-                    {% assign desktop_banner_right = block.settings.banner_image_right %}
-                    {% assign mobile_banner_right = block.settings.banner_image_right_mobile | default: block.settings.banner_image_right %}
-                    {% assign banner_link_right = block.settings.banner_link_right %}
+                      <!-- Right Banner -->
+                      <div class="banner-half banner-right">
+                        {% assign banner_link_right = block.settings.banner_link_right %}
                     
                     {% if desktop_banner_right != blank or mobile_banner_right != blank %}
                       <div class="banner-wrapper">
@@ -313,18 +317,34 @@
                         <div class="placeholder-text">Banner Phải</div>
                       </div>
                     {% endif %}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              {% endif %}
             {% when 'slideshow' %}
-              <div class="slide-content slideshow-slide">
-                <div class="slideshow-container" data-autoplay="{{ block.settings.autoplay }}" data-speed="{{ block.settings.autoplay_speed | times: 1000 }}">
-                  <div class="slideshow-wrapper">
-                    <!-- Slide 1 -->
-                    <div class="slideshow-item active" data-slide="1">
-                      {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
-                      {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
-                      {% assign slide_link_1 = block.settings.slide1_link %}
+              {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
+              {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
+              {% assign desktop_image_2 = block.settings.slide2_image_desktop %}
+              {% assign mobile_image_2 = block.settings.slide2_image_mobile | default: block.settings.slide2_image_desktop %}
+              {% assign desktop_image_3 = block.settings.slide3_image_desktop %}
+              {% assign mobile_image_3 = block.settings.slide3_image_mobile | default: block.settings.slide3_image_desktop %}
+              {% assign desktop_image_4 = block.settings.slide4_image_desktop %}
+              {% assign mobile_image_4 = block.settings.slide4_image_mobile | default: block.settings.slide4_image_desktop %}
+              {% assign desktop_image_5 = block.settings.slide5_image_desktop %}
+              {% assign mobile_image_5 = block.settings.slide5_image_mobile | default: block.settings.slide5_image_desktop %}
+              {% assign desktop_image_6 = block.settings.slide6_image_desktop %}
+              {% assign mobile_image_6 = block.settings.slide6_image_mobile | default: block.settings.slide6_image_desktop %}
+              {% assign desktop_image_7 = block.settings.slide7_image_desktop %}
+              {% assign mobile_image_7 = block.settings.slide7_image_mobile | default: block.settings.slide7_image_desktop %}
+              {% if desktop_image_1 != blank or mobile_image_1 != blank or desktop_image_2 != blank or mobile_image_2 != blank or desktop_image_3 != blank or mobile_image_3 != blank or desktop_image_4 != blank or mobile_image_4 != blank or desktop_image_5 != blank or mobile_image_5 != blank or desktop_image_6 != blank or mobile_image_6 != blank or desktop_image_7 != blank or mobile_image_7 != blank %}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                  <div class="slide-content slideshow-slide">
+                    <div class="slideshow-container" data-autoplay="{{ block.settings.autoplay }}" data-speed="{{ block.settings.autoplay_speed | times: 1000 }}">
+                      <div class="slideshow-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="slideshow-item active" data-slide="1">
+                          {% assign slide_link_1 = block.settings.slide1_link %}
                       
                       {% if desktop_image_1 != blank or mobile_image_1 != blank %}
                         {% if slide_link_1 != blank %}
@@ -386,11 +406,9 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 2 -->
-                    <div class="slideshow-item" data-slide="2">
-                      {% assign desktop_image_2 = block.settings.slide2_image_desktop %}
-                      {% assign mobile_image_2 = block.settings.slide2_image_mobile | default: block.settings.slide2_image_desktop %}
-                      {% assign slide_link_2 = block.settings.slide2_link %}
+                        <!-- Slide 2 -->
+                        <div class="slideshow-item" data-slide="2">
+                          {% assign slide_link_2 = block.settings.slide2_link %}
                       
                       {% if desktop_image_2 != blank or mobile_image_2 != blank %}
                         {% if slide_link_2 != blank %}
@@ -452,11 +470,9 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 3 -->
-                    <div class="slideshow-item" data-slide="3">
-                      {% assign desktop_image_3 = block.settings.slide3_image_desktop %}
-                      {% assign mobile_image_3 = block.settings.slide3_image_mobile | default: block.settings.slide3_image_desktop %}
-                      {% assign slide_link_3 = block.settings.slide3_link %}
+                        <!-- Slide 3 -->
+                        <div class="slideshow-item" data-slide="3">
+                          {% assign slide_link_3 = block.settings.slide3_link %}
                       
                       {% if desktop_image_3 != blank or mobile_image_3 != blank %}
                         {% if slide_link_3 != blank %}
@@ -518,11 +534,9 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 4 -->
-                    <div class="slideshow-item" data-slide="4">
-                      {% assign desktop_image_4 = block.settings.slide4_image_desktop %}
-                      {% assign mobile_image_4 = block.settings.slide4_image_mobile | default: block.settings.slide4_image_desktop %}
-                      {% assign slide_link_4 = block.settings.slide4_link %}
+                        <!-- Slide 4 -->
+                        <div class="slideshow-item" data-slide="4">
+                          {% assign slide_link_4 = block.settings.slide4_link %}
                       
                       {% if desktop_image_4 != blank or mobile_image_4 != blank %}
                         {% if slide_link_4 != blank %}
@@ -584,11 +598,9 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 5 -->
-                    <div class="slideshow-item" data-slide="5">
-                      {% assign desktop_image_5 = block.settings.slide5_image_desktop %}
-                      {% assign mobile_image_5 = block.settings.slide5_image_mobile | default: block.settings.slide5_image_desktop %}
-                      {% assign slide_link_5 = block.settings.slide5_link %}
+                        <!-- Slide 5 -->
+                        <div class="slideshow-item" data-slide="5">
+                          {% assign slide_link_5 = block.settings.slide5_link %}
                       
                       {% if desktop_image_5 != blank or mobile_image_5 != blank %}
                         {% if slide_link_5 != blank %}
@@ -650,11 +662,9 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 6 -->
-                    <div class="slideshow-item" data-slide="6">
-                      {% assign desktop_image_6 = block.settings.slide6_image_desktop %}
-                      {% assign mobile_image_6 = block.settings.slide6_image_mobile | default: block.settings.slide6_image_desktop %}
-                      {% assign slide_link_6 = block.settings.slide6_link %}
+                        <!-- Slide 6 -->
+                        <div class="slideshow-item" data-slide="6">
+                          {% assign slide_link_6 = block.settings.slide6_link %}
                       
                       {% if desktop_image_6 != blank or mobile_image_6 != blank %}
                         {% if slide_link_6 != blank %}
@@ -716,11 +726,9 @@
                       {% endif %}
                     </div>
                     
-                    <!-- Slide 7 -->
-                    <div class="slideshow-item" data-slide="7">
-                      {% assign desktop_image_7 = block.settings.slide7_image_desktop %}
-                      {% assign mobile_image_7 = block.settings.slide7_image_mobile | default: block.settings.slide7_image_desktop %}
-                      {% assign slide_link_7 = block.settings.slide7_link %}
+                        <!-- Slide 7 -->
+                        <div class="slideshow-item" data-slide="7">
+                          {% assign slide_link_7 = block.settings.slide7_link %}
                       
                       {% if desktop_image_7 != blank or mobile_image_7 != blank %}
                         {% if slide_link_7 != blank %}
@@ -786,21 +794,43 @@
                   <!-- Navigation Dots -->
                   {% if block.settings.show_dots %}
                     <div class="slideshow-dots">
-                      <div class="slideshow-dot active" data-slide="1"></div>
-                      <div class="slideshow-dot" data-slide="2"></div>
-                      <div class="slideshow-dot" data-slide="3"></div>
-                      <div class="slideshow-dot" data-slide="4"></div>
-                      <div class="slideshow-dot" data-slide="5"></div>
-                      <div class="slideshow-dot" data-slide="6"></div>
-                      <div class="slideshow-dot" data-slide="7"></div>
+                      {% assign dot_index = 0 %}
+                      {% if desktop_image_1 != blank or mobile_image_1 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="1"></button>
+                      {% endif %}
+                      {% if desktop_image_2 != blank or mobile_image_2 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="2"></button>
+                      {% endif %}
+                      {% if desktop_image_3 != blank or mobile_image_3 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="3"></button>
+                      {% endif %}
+                      {% if desktop_image_4 != blank or mobile_image_4 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="4"></button>
+                      {% endif %}
+                      {% if desktop_image_5 != blank or mobile_image_5 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="5"></button>
+                      {% endif %}
+                      {% if desktop_image_6 != blank or mobile_image_6 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="6"></button>
+                      {% endif %}
+                      {% if desktop_image_7 != blank or mobile_image_7 != blank %}
+                        {% assign dot_index = dot_index | plus: 1 %}
+                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="7"></button>
+                      {% endif %}
                     </div>
                   {% endif %}
                   
                   <!-- Navigation Arrows -->
                   {% if block.settings.show_arrows %}
                     <div class="slideshow-arrows">
-                      <div class="slideshow-arrow slideshow-prev">‹</div>
-                      <div class="slideshow-arrow slideshow-next">›</div>
+                      <button class="slideshow-arrow slideshow-prev">‹</button>
+                      <button class="slideshow-arrow slideshow-next">›</button>
                     </div>
                   {% endif %}
                 </div>
@@ -987,7 +1017,13 @@
       // Event listeners for dots
       dots.forEach(function(dot, index) {
         dot.addEventListener('click', function() {
-          showSlide(index);
+          const slideNumber = parseInt(dot.getAttribute('data-slide'));
+          const slideIndex = Array.from(slides).findIndex(slide => 
+            slide.getAttribute('data-slide') === slideNumber.toString()
+          );
+          if (slideIndex !== -1) {
+            showSlide(slideIndex);
+          }
           stopAutoplay();
           startAutoplay();
         });
