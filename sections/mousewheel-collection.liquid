@@ -321,41 +321,46 @@
                 <div class="slideshow-container" data-autoplay="{{ block.settings.autoplay }}" data-speed="{{ block.settings.autoplay_speed | times: 1000 }}">
                   <div class="slideshow-wrapper">
                     <!-- Slide 1 -->
-                    {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
-                    {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
-                    {% assign slide_link_1 = block.settings.slide1_link %}
-                    
-                    {% if desktop_image_1 != blank or mobile_image_1 != blank %}
                     <div class="slideshow-item active" data-slide="1">
+                      {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
+                      {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
+                      {% assign slide_link_1 = block.settings.slide1_link %}
                       
-                      {% if slide_link_1 != blank %}
-                        <a href="{{ slide_link_1}}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                      {% endif %}
-                      
-                      <div class="slideshow-image-container">
-                        <!-- Desktop Image -->
-                        {% if desktop_image_1 != blank %}
-                          <img 
-                            src="{{ desktop_image_1 | img_url: 'master' }}"
-                            alt="{{ desktop_image_1.alt | escape }}"
-                            loading="lazy"
-                            class="slideshow-image desktop-media"
-                          >
+                      {% if desktop_image_1 != blank or mobile_image_1 != blank %}
+                        {% if slide_link_1 != blank %}
+                          <a href="{{ slide_link_1}}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
                         
-                        <!-- Mobile Image -->
-                        {% if mobile_image_1 != blank and mobile_image_1 != desktop_image_1 %}
-                          <img 
-                            src="{{ mobile_image_1 | img_url: 'master' }}"
-                            alt="{{ mobile_image_1.alt | escape }}"
-                            loading="lazy"
-                            class="slideshow-image mobile-media"
-                          >
+                        <div class="slideshow-image-container">
+                          <!-- Desktop Image -->
+                          {% if desktop_image_1 != blank %}
+                            <img 
+                              src="{{ desktop_image_1 | img_url: 'master' }}"
+                              alt="{{ desktop_image_1.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image desktop-media"
+                            >
+                          {% endif %}
+                          
+                          <!-- Mobile Image -->
+                          {% if mobile_image_1 != blank and mobile_image_1 != desktop_image_1 %}
+                            <img 
+                              src="{{ mobile_image_1 | img_url: 'master' }}"
+                              alt="{{ mobile_image_1.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image mobile-media"
+                            >
+                          {% endif %}
+                        </div>
+                        
+                        {% if slide_link_1 != blank %}
+                          </a>
                         {% endif %}
-                      </div>
-                      
-                      {% if slide_link_1 != blank %}
-                        </a>
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 1</div>
+                        </div>
                       {% endif %}
                       
                       <!-- Slide 1 Content -->
@@ -380,46 +385,48 @@
                         </div>
                       {% endif %}
                     </div>
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}
                     
                     <!-- Slide 2 -->
-                    {% assign desktop_image_2 = block.settings.slide2_image_desktop %}
-                    {% assign mobile_image_2 = block.settings.slide2_image_mobile | default: block.settings.slide2_image_desktop %}
-                    {% assign slide_link_2 = block.settings.slide2_link %}
-                    
-                    {% if desktop_image_2 != blank or mobile_image_2 != blank %}
                     <div class="slideshow-item" data-slide="2">
+                      {% assign desktop_image_2 = block.settings.slide2_image_desktop %}
+                      {% assign mobile_image_2 = block.settings.slide2_image_mobile | default: block.settings.slide2_image_desktop %}
+                      {% assign slide_link_2 = block.settings.slide2_link %}
                       
-                      {% if slide_link_2 != blank %}
-                        <a href="{{ slide_link_2 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                      {% endif %}
-                      
-                      <div class="slideshow-image-container">
-                        <!-- Desktop Image -->
-                        {% if desktop_image_2 != blank %}
-                          <img 
-                            src="{{ desktop_image_2 | img_url: 'master' }}"
-                            alt="{{ desktop_image_2.alt | escape }}"
-                            loading="lazy"
-                            class="slideshow-image desktop-media"
-                          >
+                      {% if desktop_image_2 != blank or mobile_image_2 != blank %}
+                        {% if slide_link_2 != blank %}
+                          <a href="{{ slide_link_2 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
                         
-                        <!-- Mobile Image -->
-                        {% if mobile_image_2 != blank and mobile_image_2 != desktop_image_2 %}
-                          <img 
-                            src="{{ mobile_image_2 | img_url: 'master' }}"
-                            alt="{{ mobile_image_2.alt | escape }}"
-                            loading="lazy"
-                            class="slideshow-image mobile-media"
-                          >
+                        <div class="slideshow-image-container">
+                          <!-- Desktop Image -->
+                          {% if desktop_image_2 != blank %}
+                            <img 
+                              src="{{ desktop_image_2 | img_url: 'master' }}"
+                              alt="{{ desktop_image_2.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image desktop-media"
+                            >
+                          {% endif %}
+                          
+                          <!-- Mobile Image -->
+                          {% if mobile_image_2 != blank and mobile_image_2 != desktop_image_2 %}
+                            <img 
+                              src="{{ mobile_image_2 | img_url: 'master' }}"
+                              alt="{{ mobile_image_2.alt | escape }}"
+                              loading="lazy"
+                              class="slideshow-image mobile-media"
+                            >
+                          {% endif %}
+                        </div>
+                        
+                        {% if slide_link_2 != blank %}
+                          </a>
                         {% endif %}
-                      </div>
-                      
-                      {% if slide_link_2 != blank %}
-                        </a>
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 2</div>
+                        </div>
                       {% endif %}
                       
                       <!-- Slide 2 Content -->
@@ -444,15 +451,14 @@
                         </div>
                       {% endif %}
                     </div>
-                    {% endif %}
                     
                     <!-- Slide 3 -->
-                    {% assign desktop_image_3 = block.settings.slide3_image_desktop %}
-                    {% assign mobile_image_3 = block.settings.slide3_image_mobile | default: block.settings.slide3_image_desktop %}
-                    {% assign slide_link_3 = block.settings.slide3_link %}
-                    
-                    {% if desktop_image_3 != blank or mobile_image_3 != blank %}
                     <div class="slideshow-item" data-slide="3">
+                      {% assign desktop_image_3 = block.settings.slide3_image_desktop %}
+                      {% assign mobile_image_3 = block.settings.slide3_image_mobile | default: block.settings.slide3_image_desktop %}
+                      {% assign slide_link_3 = block.settings.slide3_link %}
+                      
+                      {% if desktop_image_3 != blank or mobile_image_3 != blank %}
                         {% if slide_link_3 != blank %}
                           <a href="{{ slide_link_3 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
@@ -482,6 +488,12 @@
                         {% if slide_link_3 != blank %}
                           </a>
                         {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 3</div>
+                        </div>
+                      {% endif %}
                       
                       <!-- Slide 3 Content -->
                       {% if block.settings.slide3_heading != blank or block.settings.slide3_text != blank %}
@@ -507,12 +519,12 @@
                     </div>
                     
                     <!-- Slide 4 -->
-                    {% assign desktop_image_4 = block.settings.slide4_image_desktop %}
-                    {% assign mobile_image_4 = block.settings.slide4_image_mobile | default: block.settings.slide4_image_desktop %}
-                    {% assign slide_link_4 = block.settings.slide4_link %}
-                    
-                    {% if desktop_image_4 != blank or mobile_image_4 != blank %}
                     <div class="slideshow-item" data-slide="4">
+                      {% assign desktop_image_4 = block.settings.slide4_image_desktop %}
+                      {% assign mobile_image_4 = block.settings.slide4_image_mobile | default: block.settings.slide4_image_desktop %}
+                      {% assign slide_link_4 = block.settings.slide4_link %}
+                      
+                      {% if desktop_image_4 != blank or mobile_image_4 != blank %}
                         {% if slide_link_4 != blank %}
                           <a href="{{ slide_link_4 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
@@ -542,6 +554,12 @@
                         {% if slide_link_4 != blank %}
                           </a>
                         {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 4</div>
+                        </div>
+                      {% endif %}
                       
                       <!-- Slide 4 Content -->
                       {% if block.settings.slide4_heading != blank or block.settings.slide4_text != blank %}
@@ -567,12 +585,12 @@
                     </div>
                     
                     <!-- Slide 5 -->
-                    {% assign desktop_image_5 = block.settings.slide5_image_desktop %}
-                    {% assign mobile_image_5 = block.settings.slide5_image_mobile | default: block.settings.slide5_image_desktop %}
-                    {% assign slide_link_5 = block.settings.slide5_link %}
-                    
-                    {% if desktop_image_5 != blank or mobile_image_5 != blank %}
                     <div class="slideshow-item" data-slide="5">
+                      {% assign desktop_image_5 = block.settings.slide5_image_desktop %}
+                      {% assign mobile_image_5 = block.settings.slide5_image_mobile | default: block.settings.slide5_image_desktop %}
+                      {% assign slide_link_5 = block.settings.slide5_link %}
+                      
+                      {% if desktop_image_5 != blank or mobile_image_5 != blank %}
                         {% if slide_link_5 != blank %}
                           <a href="{{ slide_link_5 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
@@ -602,6 +620,12 @@
                         {% if slide_link_5 != blank %}
                           </a>
                         {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 5</div>
+                        </div>
+                      {% endif %}
                       
                       <!-- Slide 5 Content -->
                       {% if block.settings.slide5_heading != blank or block.settings.slide5_text != blank %}
@@ -625,15 +649,14 @@
                         </div>
                       {% endif %}
                     </div>
-                    {% endif %}
                     
                     <!-- Slide 6 -->
-                    {% assign desktop_image_6 = block.settings.slide6_image_desktop %}
-                    {% assign mobile_image_6 = block.settings.slide6_image_mobile | default: block.settings.slide6_image_desktop %}
-                    {% assign slide_link_6 = block.settings.slide6_link %}
-                    
-                    {% if desktop_image_6 != blank or mobile_image_6 != blank %}
                     <div class="slideshow-item" data-slide="6">
+                      {% assign desktop_image_6 = block.settings.slide6_image_desktop %}
+                      {% assign mobile_image_6 = block.settings.slide6_image_mobile | default: block.settings.slide6_image_desktop %}
+                      {% assign slide_link_6 = block.settings.slide6_link %}
+                      
+                      {% if desktop_image_6 != blank or mobile_image_6 != blank %}
                         {% if slide_link_6 != blank %}
                           <a href="{{ slide_link_6 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
@@ -663,6 +686,12 @@
                         {% if slide_link_6 != blank %}
                           </a>
                         {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 6</div>
+                        </div>
+                      {% endif %}
                       
                       <!-- Slide 6 Content -->
                       {% if block.settings.slide6_heading != blank or block.settings.slide6_text != blank %}
@@ -686,15 +715,14 @@
                         </div>
                       {% endif %}
                     </div>
-                    {% endif %}
                     
                     <!-- Slide 7 -->
-                    {% assign desktop_image_7 = block.settings.slide7_image_desktop %}
-                    {% assign mobile_image_7 = block.settings.slide7_image_mobile | default: block.settings.slide7_image_desktop %}
-                    {% assign slide_link_7 = block.settings.slide7_link %}
-                    
-                    {% if desktop_image_7 != blank or mobile_image_7 != blank %}
                     <div class="slideshow-item" data-slide="7">
+                      {% assign desktop_image_7 = block.settings.slide7_image_desktop %}
+                      {% assign mobile_image_7 = block.settings.slide7_image_mobile | default: block.settings.slide7_image_desktop %}
+                      {% assign slide_link_7 = block.settings.slide7_link %}
+                      
+                      {% if desktop_image_7 != blank or mobile_image_7 != blank %}
                         {% if slide_link_7 != blank %}
                           <a href="{{ slide_link_7 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
                         {% endif %}
@@ -724,6 +752,12 @@
                         {% if slide_link_7 != blank %}
                           </a>
                         {% endif %}
+                      {% else %}
+                        <div class="placeholder-container">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <div class="placeholder-text">Slide 7</div>
+                        </div>
+                      {% endif %}
                       
                       <!-- Slide 7 Content -->
                       {% if block.settings.slide7_heading != blank or block.settings.slide7_text != blank %}
@@ -747,33 +781,18 @@
                         </div>
                       {% endif %}
                     </div>
-                    {% endif %}
                   </div>
                   
                   <!-- Navigation Dots -->
                   {% if block.settings.show_dots %}
                     <div class="slideshow-dots">
-                      {% if desktop_image_1 != blank or mobile_image_1 != blank %}
-                        <div class="slideshow-dot active" data-slide="1"></div>
-                      {% endif %}
-                      {% if desktop_image_2 != blank or mobile_image_2 != blank %}
-                        <div class="slideshow-dot" data-slide="2"></div>
-                      {% endif %}
-                      {% if desktop_image_3 != blank or mobile_image_3 != blank %}
-                        <div class="slideshow-dot" data-slide="3"></div>
-                      {% endif %}
-                      {% if desktop_image_4 != blank or mobile_image_4 != blank %}
-                        <div class="slideshow-dot" data-slide="4"></div>
-                      {% endif %}
-                      {% if desktop_image_5 != blank or mobile_image_5 != blank %}
-                        <div class="slideshow-dot" data-slide="5"></div>
-                      {% endif %}
-                      {% if desktop_image_6 != blank or mobile_image_6 != blank %}
-                        <div class="slideshow-dot" data-slide="6"></div>
-                      {% endif %}
-                      {% if desktop_image_7 != blank or mobile_image_7 != blank %}
-                        <div class="slideshow-dot" data-slide="7"></div>
-                      {% endif %}
+                      <div class="slideshow-dot active" data-slide="1"></div>
+                      <div class="slideshow-dot" data-slide="2"></div>
+                      <div class="slideshow-dot" data-slide="3"></div>
+                      <div class="slideshow-dot" data-slide="4"></div>
+                      <div class="slideshow-dot" data-slide="5"></div>
+                      <div class="slideshow-dot" data-slide="6"></div>
+                      <div class="slideshow-dot" data-slide="7"></div>
                     </div>
                   {% endif %}
                   
