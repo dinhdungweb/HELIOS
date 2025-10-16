@@ -1,8 +1,8 @@
 {% comment %}
-  Section: Mousewheel Collection
-  - Tạo landing page cho bộ sưu tập mới với hiệu ứng mousewheel control
-  - Hỗ trợ hiển thị cả video và hình ảnh
-  - Thiết kế tương tự như trang web YSL
+  Section: Mousewheel Collection (fixed)
+  - Landing page cho bộ sưu tập với hiệu ứng mousewheel
+  - Hỗ trợ video (Shopify upload / YouTube / Vimeo) & hình ảnh
+  - Dùng Swiper API mới (v10+)
 {% endcomment %}
 
 <!-- Mousewheel Collection CSS -->
@@ -26,7 +26,7 @@
                     {% if desktop_image != blank %}
                       <img 
                         src="{{ desktop_image | img_url: 'master' }}"
-                        alt="{{ desktop_image.alt | escape }}"
+                        alt="{{ desktop_image.alt | escape | default: block.settings.heading }}"
                         loading="lazy"
                         class="full-width-image desktop-media"
                       >
@@ -36,7 +36,7 @@
                     {% if mobile_image != blank and mobile_image != desktop_image %}
                       <img 
                         src="{{ mobile_image | img_url: 'master' }}"
-                        alt="{{ mobile_image.alt | escape }}"
+                        alt="{{ mobile_image.alt | escape | default: block.settings.heading }}"
                         loading="lazy"
                         class="full-width-image mobile-media"
                       >
@@ -61,6 +61,7 @@
                 </div>
               </div>
             {% endif %}
+
           {% when 'video' %}
               {% assign desktop_video = block.settings.video %}
               {% assign mobile_video = block.settings.video_mobile | default: block.settings.video %}
@@ -182,6 +183,7 @@
                   </div>
                 </div>
               {% endif %}
+
           {% when 'banner' %}
               {% assign desktop_banner_left = block.settings.banner_image_left %}
               {% assign mobile_banner_left = block.settings.banner_image_left_mobile | default: block.settings.banner_image_left %}
@@ -207,7 +209,7 @@
                         {% if desktop_banner_left != blank %}
                           <img 
                             src="{{ desktop_banner_left | img_url: 'master' }}"
-                            alt="{{ desktop_banner_left.alt | escape }}"
+                            alt="{{ desktop_banner_left.alt | escape | default: block.settings.heading_left }}"
                             loading="lazy"
                             class="full-width-banner desktop-media"
                           >
@@ -217,7 +219,7 @@
                         {% if mobile_banner_left != blank and mobile_banner_left != desktop_banner_left %}
                           <img 
                             src="{{ mobile_banner_left | img_url: 'master' }}"
-                            alt="{{ mobile_banner_left.alt | escape }}"
+                            alt="{{ mobile_banner_left.alt | escape | default: block.settings.heading_left }}"
                             loading="lazy"
                             class="full-width-banner mobile-media"
                           >
@@ -269,7 +271,7 @@
                         {% if desktop_banner_right != blank %}
                           <img 
                             src="{{ desktop_banner_right | img_url: 'master' }}"
-                            alt="{{ desktop_banner_right.alt | escape }}"
+                            alt="{{ desktop_banner_right.alt | escape | default: block.settings.heading_right }}"
                             loading="lazy"
                             class="full-width-banner desktop-media"
                           >
@@ -279,7 +281,7 @@
                         {% if mobile_banner_right != blank and mobile_banner_right != desktop_banner_right %}
                           <img 
                             src="{{ mobile_banner_right | img_url: 'master' }}"
-                            alt="{{ mobile_banner_right.alt | escape }}"
+                            alt="{{ mobile_banner_right.alt | escape | default: block.settings.heading_right }}"
                             loading="lazy"
                             class="full-width-banner mobile-media"
                           >
@@ -320,6 +322,7 @@
                   </div>
                 </div>
               {% endif %}
+
           {% when 'slideshow' %}
               {% assign desktop_image_1 = block.settings.slide1_image_desktop %}
               {% assign mobile_image_1 = block.settings.slide1_image_mobile | default: block.settings.slide1_image_desktop %}
@@ -354,7 +357,7 @@
                           {% if desktop_image_1 != blank %}
                             <img 
                               src="{{ desktop_image_1 | img_url: 'master' }}"
-                              alt="{{ desktop_image_1.alt | escape }}"
+                              alt="{{ desktop_image_1.alt | escape | default: block.settings.slide1_heading }}"
                               loading="lazy"
                               class="slideshow-image desktop-media"
                             >
@@ -364,7 +367,7 @@
                           {% if mobile_image_1 != blank and mobile_image_1 != desktop_image_1 %}
                             <img 
                               src="{{ mobile_image_1 | img_url: 'master' }}"
-                              alt="{{ mobile_image_1.alt | escape }}"
+                              alt="{{ mobile_image_1.alt | escape | default: block.settings.slide1_heading }}"
                               loading="lazy"
                               class="slideshow-image mobile-media"
                             >
@@ -404,437 +407,112 @@
                       {% endif %}
                     </div>
                     
-                        <!-- Slide 2 -->
-                        <div class="slideshow-item" data-slide="2">
-                          {% assign slide_link_2 = block.settings.slide2_link %}
-                      
-                      {% if desktop_image_2 != blank or mobile_image_2 != blank %}
-                        {% if slide_link_2 != blank %}
-                          <a href="{{ slide_link_2 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_2 != blank %}
-                            <img 
-                              src="{{ desktop_image_2 | img_url: 'master' }}"
-                              alt="{{ desktop_image_2.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
-                          {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_2 != blank and mobile_image_2 != desktop_image_2 %}
-                            <img 
-                              src="{{ mobile_image_2 | img_url: 'master' }}"
-                              alt="{{ mobile_image_2.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
-                          {% endif %}
-                        </div>
-                        
-                        {% if slide_link_2 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 2</div>
-                        </div>
-                      {% endif %}
-                      
-                      <!-- Slide 2 Content -->
-                      {% if block.settings.slide2_heading != blank or block.settings.slide2_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide2_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide2_heading }}</h2>
+                        <!-- Slide 2–7 -->
+                        {%- comment -%} Slide 2–7 (dynamic keys, fixed) {%- endcomment -%}
+                        {% for i in (2..7) %}
+                          {% capture key_d %}slide{{ i }}_image_desktop{% endcapture %}
+                          {% capture key_m %}slide{{ i }}_image_mobile{% endcapture %}
+                          {% capture key_link %}slide{{ i }}_link{% endcapture %}
+                          {% capture key_heading %}slide{{ i }}_heading{% endcapture %}
+                          {% capture key_text %}slide{{ i }}_text{% endcapture %}
+                          {% capture key_btn %}slide{{ i }}_button_label{% endcapture %}
+
+                          {% assign d_img = block.settings[key_d] %}
+                          {% assign m_img = block.settings[key_m] | default: d_img %}
+                          {% assign link = block.settings[key_link] %}
+                          {% assign heading = block.settings[key_heading] %}
+                          {% assign text = block.settings[key_text] %}
+                          {% assign btn = block.settings[key_btn] %}
+
+                          <div class="slideshow-item" data-slide="{{ i }}">
+                            {% if d_img != blank or m_img != blank %}
+                              {% if link != blank %}<a href="{{ link }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>{% endif %}
+                              <div class="slideshow-image-container">
+                                {% if d_img != blank %}
+                                  <img src="{{ d_img | img_url: 'master' }}"
+                                       alt="{{ d_img.alt | escape | default: heading }}"
+                                       loading="lazy"
+                                       class="slideshow-image desktop-media">
+                                {% endif %}
+                                {% if m_img != blank and m_img != d_img %}
+                                  <img src="{{ m_img | img_url: 'master' }}"
+                                       alt="{{ m_img.alt | escape | default: heading }}"
+                                       loading="lazy"
+                                       class="slideshow-image mobile-media">
+                                {% endif %}
+                              </div>
+                              {% if link != blank %}</a>{% endif %}
+                            {% else %}
+                              <div class="placeholder-container">
+                                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                                <div class="placeholder-text">Slide {{ i }}</div>
+                              </div>
                             {% endif %}
-                            {% if block.settings.slide2_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide2_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide2_button_label != blank and block.settings.slide2_link != blank %}
-                              <a href="{{ block.settings.slide2_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide2_button_label }}
-                              </a>
+
+                            {% if heading != blank or text != blank %}
+                              <div class="slideshow-content text-{{ block.settings.text_position }}" style="color: {{ block.settings.text_color }};">
+                                <div class="slideshow-overlay"
+                                     style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+                                <div class="slideshow-text-content">
+                                  {% if heading != blank %}<h2 class="slideshow-heading">{{ heading }}</h2>{% endif %}
+                                  {% if text != blank %}<div class="slideshow-text">{{ text }}</div>{% endif %}
+                                  {% if btn != blank and link != blank %}
+                                    <a href="{{ link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ btn }}</a>
+                                  {% endif %}
+                                </div>
+                              </div>
                             {% endif %}
                           </div>
-                        </div>
-                      {% endif %}
-                    </div>
-                    
-                        <!-- Slide 3 -->
-                        <div class="slideshow-item" data-slide="3">
-                          {% assign slide_link_3 = block.settings.slide3_link %}
+                        {% endfor %}
+                      </div>
                       
-                      {% if desktop_image_3 != blank or mobile_image_3 != blank %}
-                        {% if slide_link_3 != blank %}
-                          <a href="{{ slide_link_3 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_3 != blank %}
-                            <img 
-                              src="{{ desktop_image_3 | img_url: 'master' }}"
-                              alt="{{ desktop_image_3.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
+                      <!-- Navigation Dots -->
+                      {% if block.settings.show_dots %}
+                        <div class="slideshow-dots">
+                          {% assign dot_index = 0 %}
+                          {% if desktop_image_1 != blank or mobile_image_1 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot active" data-slide="1"></button>
                           {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_3 != blank and mobile_image_3 != desktop_image_3 %}
-                            <img 
-                              src="{{ mobile_image_3 | img_url: 'master' }}"
-                              alt="{{ mobile_image_3.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
+                          {% if desktop_image_2 != blank or mobile_image_2 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot" data-slide="2"></button>
                           {% endif %}
-                        </div>
-                        
-                        {% if slide_link_3 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 3</div>
+                          {% if desktop_image_3 != blank or mobile_image_3 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot" data-slide="3"></button>
+                          {% endif %}
+                          {% if desktop_image_4 != blank or mobile_image_4 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot" data-slide="4"></button>
+                          {% endif %}
+                          {% if desktop_image_5 != blank or mobile_image_5 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot" data-slide="5"></button>
+                          {% endif %}
+                          {% if desktop_image_6 != blank or mobile_image_6 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot" data-slide="6"></button>
+                          {% endif %}
+                          {% if desktop_image_7 != blank or mobile_image_7 != blank %}
+                            {% assign dot_index = dot_index | plus: 1 %}
+                            <button class="slideshow-dot" data-slide="7"></button>
+                          {% endif %}
                         </div>
                       {% endif %}
                       
-                      <!-- Slide 3 Content -->
-                      {% if block.settings.slide3_heading != blank or block.settings.slide3_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide3_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide3_heading }}</h2>
-                            {% endif %}
-                            {% if block.settings.slide3_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide3_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide3_button_label != blank and block.settings.slide3_link != blank %}
-                              <a href="{{ block.settings.slide3_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide3_button_label }}
-                              </a>
-                            {% endif %}
-                          </div>
-                        </div>
-                      {% endif %}
-                    </div>
-                    
-                        <!-- Slide 4 -->
-                        <div class="slideshow-item" data-slide="4">
-                          {% assign slide_link_4 = block.settings.slide4_link %}
-                      
-                      {% if desktop_image_4 != blank or mobile_image_4 != blank %}
-                        {% if slide_link_4 != blank %}
-                          <a href="{{ slide_link_4 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_4 != blank %}
-                            <img 
-                              src="{{ desktop_image_4 | img_url: 'master' }}"
-                              alt="{{ desktop_image_4.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
-                          {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_4 != blank and mobile_image_4 != desktop_image_4 %}
-                            <img 
-                              src="{{ mobile_image_4 | img_url: 'master' }}"
-                              alt="{{ mobile_image_4.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
-                          {% endif %}
-                        </div>
-                        
-                        {% if slide_link_4 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 4</div>
-                        </div>
-                      {% endif %}
-                      
-                      <!-- Slide 4 Content -->
-                      {% if block.settings.slide4_heading != blank or block.settings.slide4_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide4_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide4_heading }}</h2>
-                            {% endif %}
-                            {% if block.settings.slide4_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide4_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide4_button_label != blank and block.settings.slide4_link != blank %}
-                              <a href="{{ block.settings.slide4_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide4_button_label }}
-                              </a>
-                            {% endif %}
-                          </div>
-                        </div>
-                      {% endif %}
-                    </div>
-                    
-                        <!-- Slide 5 -->
-                        <div class="slideshow-item" data-slide="5">
-                          {% assign slide_link_5 = block.settings.slide5_link %}
-                      
-                      {% if desktop_image_5 != blank or mobile_image_5 != blank %}
-                        {% if slide_link_5 != blank %}
-                          <a href="{{ slide_link_5 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_5 != blank %}
-                            <img 
-                              src="{{ desktop_image_5 | img_url: 'master' }}"
-                              alt="{{ desktop_image_5.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
-                          {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_5 != blank and mobile_image_5 != desktop_image_5 %}
-                            <img 
-                              src="{{ mobile_image_5 | img_url: 'master' }}"
-                              alt="{{ mobile_image_5.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
-                          {% endif %}
-                        </div>
-                        
-                        {% if slide_link_5 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 5</div>
-                        </div>
-                      {% endif %}
-                      
-                      <!-- Slide 5 Content -->
-                      {% if block.settings.slide5_heading != blank or block.settings.slide5_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide5_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide5_heading }}</h2>
-                            {% endif %}
-                            {% if block.settings.slide5_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide5_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide5_button_label != blank and block.settings.slide5_link != blank %}
-                              <a href="{{ block.settings.slide5_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide5_button_label }}
-                              </a>
-                            {% endif %}
-                          </div>
-                        </div>
-                      {% endif %}
-                    </div>
-                    
-                        <!-- Slide 6 -->
-                        <div class="slideshow-item" data-slide="6">
-                          {% assign slide_link_6 = block.settings.slide6_link %}
-                      
-                      {% if desktop_image_6 != blank or mobile_image_6 != blank %}
-                        {% if slide_link_6 != blank %}
-                          <a href="{{ slide_link_6 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_6 != blank %}
-                            <img 
-                              src="{{ desktop_image_6 | img_url: 'master' }}"
-                              alt="{{ desktop_image_6.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
-                          {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_6 != blank and mobile_image_6 != desktop_image_6 %}
-                            <img 
-                              src="{{ mobile_image_6 | img_url: 'master' }}"
-                              alt="{{ mobile_image_6.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
-                          {% endif %}
-                        </div>
-                        
-                        {% if slide_link_6 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 6</div>
-                        </div>
-                      {% endif %}
-                      
-                      <!-- Slide 6 Content -->
-                      {% if block.settings.slide6_heading != blank or block.settings.slide6_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide6_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide6_heading }}</h2>
-                            {% endif %}
-                            {% if block.settings.slide6_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide6_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide6_button_label != blank and block.settings.slide6_link != blank %}
-                              <a href="{{ block.settings.slide6_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide6_button_label }}
-                              </a>
-                            {% endif %}
-                          </div>
-                        </div>
-                      {% endif %}
-                    </div>
-                    
-                        <!-- Slide 7 -->
-                        <div class="slideshow-item" data-slide="7">
-                          {% assign slide_link_7 = block.settings.slide7_link %}
-                      
-                      {% if desktop_image_7 != blank or mobile_image_7 != blank %}
-                        {% if slide_link_7 != blank %}
-                          <a href="{{ slide_link_7 }}" class="slideshow-link" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                        {% endif %}
-                        
-                        <div class="slideshow-image-container">
-                          <!-- Desktop Image -->
-                          {% if desktop_image_7 != blank %}
-                            <img 
-                              src="{{ desktop_image_7 | img_url: 'master' }}"
-                              alt="{{ desktop_image_7.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image desktop-media"
-                            >
-                          {% endif %}
-                          
-                          <!-- Mobile Image -->
-                          {% if mobile_image_7 != blank and mobile_image_7 != desktop_image_7 %}
-                            <img 
-                              src="{{ mobile_image_7 | img_url: 'master' }}"
-                              alt="{{ mobile_image_7.alt | escape }}"
-                              loading="lazy"
-                              class="slideshow-image mobile-media"
-                            >
-                          {% endif %}
-                        </div>
-                        
-                        {% if slide_link_7 != blank %}
-                          </a>
-                        {% endif %}
-                      {% else %}
-                        <div class="placeholder-container">
-                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                          <div class="placeholder-text">Slide 7</div>
-                        </div>
-                      {% endif %}
-                      
-                      <!-- Slide 7 Content -->
-                      {% if block.settings.slide7_heading != blank or block.settings.slide7_text != blank %}
-                        <div class="slideshow-content text-{{ block.settings.text_position }}" 
-                             style="color: {{ block.settings.text_color }};">
-                          <div class="slideshow-overlay" 
-                               style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-                          <div class="slideshow-text-content">
-                            {% if block.settings.slide7_heading != blank %}
-                              <h2 class="slideshow-heading">{{ block.settings.slide7_heading }}</h2>
-                            {% endif %}
-                            {% if block.settings.slide7_text != blank %}
-                              <div class="slideshow-text">{{ block.settings.slide7_text }}</div>
-                            {% endif %}
-                            {% if block.settings.slide7_button_label != blank and block.settings.slide7_link != blank %}
-                              <a href="{{ block.settings.slide7_link }}" class="slideshow-button" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                                {{ block.settings.slide7_button_label }}
-                              </a>
-                            {% endif %}
-                          </div>
+                      <!-- Navigation Arrows -->
+                      {% if block.settings.show_arrows %}
+                        <div class="slideshow-arrows">
+                          <button class="slideshow-arrow slideshow-prev">‹</button>
+                          <button class="slideshow-arrow slideshow-next">›</button>
                         </div>
                       {% endif %}
                     </div>
                   </div>
-                  
-                  <!-- Navigation Dots -->
-                  {% if block.settings.show_dots %}
-                    <div class="slideshow-dots">
-                      {% assign dot_index = 0 %}
-                      {% if desktop_image_1 != blank or mobile_image_1 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="1"></button>
-                      {% endif %}
-                      {% if desktop_image_2 != blank or mobile_image_2 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="2"></button>
-                      {% endif %}
-                      {% if desktop_image_3 != blank or mobile_image_3 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="3"></button>
-                      {% endif %}
-                      {% if desktop_image_4 != blank or mobile_image_4 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="4"></button>
-                      {% endif %}
-                      {% if desktop_image_5 != blank or mobile_image_5 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="5"></button>
-                      {% endif %}
-                      {% if desktop_image_6 != blank or mobile_image_6 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="6"></button>
-                      {% endif %}
-                      {% if desktop_image_7 != blank or mobile_image_7 != blank %}
-                        {% assign dot_index = dot_index | plus: 1 %}
-                        <button class="slideshow-dot{% if dot_index == 1 %} active{% endif %}" data-slide="7"></button>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  
-                  <!-- Navigation Arrows -->
-                  {% if block.settings.show_arrows %}
-                    <div class="slideshow-arrows">
-                      <button class="slideshow-arrow slideshow-prev">‹</button>
-                      <button class="slideshow-arrow slideshow-next">›</button>
-                    </div>
-                  {% endif %}
                 </div>
-              </div>
-          {% endif %}
-        </div>
+              {% endif %}
+        {% endcase %}
       {% endfor %}
     </div>
     
@@ -858,8 +536,9 @@
       console.error('Swiper library not loaded');
       return;
     }
-    
-    const swiperContainer = document.querySelector('#mousewheel-collection-{{ section.id }} .mousewheel-swiper-container');
+
+    const rootSel = '#mousewheel-collection-{{ section.id }}';
+    const swiperContainer = document.querySelector(`${rootSel} .mousewheel-swiper-container`);
     
     if (swiperContainer) {
       const swiper = new Swiper(swiperContainer, {
@@ -869,42 +548,48 @@
         speed: 1000,
         effect: 'slide',
         grabCursor: true,
-        mousewheel: true,
-        mousewheelControl: true,
-        mousewheelReleaseOnEdges: true,
-        mousewheelForceToAxis: true,
-        mousewheelSensitivity: 1,
-        keyboardControl: true,
+        mousewheel: {
+          forceToAxis: true,
+          releaseOnEdges: true,
+          sensitivity: 1
+        },
+        keyboard: { enabled: true },
         {% if section.settings.show_pagination %}
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        paginationDynamicBullets: true,
+        pagination: {
+          el: `${rootSel} .swiper-pagination`,
+          clickable: true,
+          dynamicBullets: true
+        },
         {% endif %}
         {% if section.settings.show_navigation %}
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
+        navigation: {
+          nextEl: `${rootSel} .swiper-button-next`,
+          prevEl: `${rootSel} .swiper-button-prev`
+        },
         {% endif %}
-        onInit: function(swiper) {
-          playCurrentSlideVideo(swiper);
-        },
-        onSlideChangeEnd: function(swiper) {
-          playCurrentSlideVideo(swiper);
-        },
-        onResize: function(swiper) {
-          swiper.update();
+        on: {
+          init(swiper) {
+            playCurrentSlideVideo(swiper);
+          },
+          slideChange(swiper) {
+            playCurrentSlideVideo(swiper);
+          },
+          resize(swiper) {
+            swiper.update();
+          }
         }
       });
       
       function playCurrentSlideVideo(swiper) {
         try {
           // Pause all videos first (including Shopify uploaded videos)
-          const allVideos = document.querySelectorAll('#mousewheel-collection-{{ section.id }} video');
+          const allVideos = document.querySelectorAll(`${rootSel} video`);
           allVideos.forEach(video => {
-            video.pause();
+            try { video.pause(); } catch(e){}
           });
           
           // Pause all YouTube videos
-          const allYoutubeIframes = document.querySelectorAll('#mousewheel-collection-{{ section.id }} iframe[id^="youtube-"]');
+          const allYoutubeIframes = document.querySelectorAll(`${rootSel} iframe[id^="youtube-"]`);
           allYoutubeIframes.forEach(iframe => {
             if (iframe.contentWindow) {
               iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
@@ -912,7 +597,7 @@
           });
           
           // Pause all Vimeo videos
-          const allVimeoIframes = document.querySelectorAll('#mousewheel-collection-{{ section.id }} iframe[id^="vimeo-"]');
+          const allVimeoIframes = document.querySelectorAll(`${rootSel} iframe[id^="vimeo-"]`);
           allVimeoIframes.forEach(iframe => {
             if (iframe.contentWindow) {
               iframe.contentWindow.postMessage('{"method":"pause"}', '*');
@@ -926,7 +611,7 @@
           // Play video if current slide has one (HTML5 video including Shopify uploaded)
           const video = currentSlide.querySelector('video');
           if (video) {
-            video.currentTime = 0; // Reset to beginning
+            try { video.currentTime = 0; } catch(e){}
             video.play().catch(e => console.log('Video autoplay prevented:', e));
           }
           
@@ -954,180 +639,181 @@
     
     // Initialize slideshows
     initSlideshows();
-  });
-  
-  function initSlideshows() {
-    const slideshows = document.querySelectorAll('#mousewheel-collection-{{ section.id }} .slideshow-container');
-    
-    slideshows.forEach(function(slideshow) {
-      const autoplay = slideshow.dataset.autoplay === 'true';
-      const speed = parseInt(slideshow.dataset.speed) || 5000;
-      const slides = slideshow.querySelectorAll('.slideshow-item');
-      const dots = slideshow.querySelectorAll('.slideshow-dot');
-      const prevBtn = slideshow.querySelector('.slideshow-prev');
-      const nextBtn = slideshow.querySelector('.slideshow-next');
+
+    function initSlideshows() {
+      const slideshows = document.querySelectorAll(`${rootSel} .slideshow-container`);
       
-      let currentSlide = 0;
-      let autoplayInterval;
-      
-      function showSlide(index) {
-        // Hide all slides
-        slides.forEach(function(slide, i) {
-          slide.classList.remove('active');
-          if (dots[i]) {
-            dots[i].classList.remove('active');
-          }
-        });
+      slideshows.forEach(function(slideshow) {
+        const autoplay = String(slideshow.dataset.autoplay).toLowerCase() === 'true';
+        const speed = parseInt(slideshow.dataset.speed || '5000', 10);
+        const slides = slideshow.querySelectorAll('.slideshow-item');
+        const dots = slideshow.parentElement.querySelectorAll('.slideshow-dots .slideshow-dot');
+        const prevBtn = slideshow.parentElement.querySelector('.slideshow-arrows .slideshow-prev');
+        const nextBtn = slideshow.parentElement.querySelector('.slideshow-arrows .slideshow-next');
         
-        // Show current slide
-        if (slides[index]) {
-          slides[index].classList.add('active');
-          if (dots[index]) {
-            dots[index].classList.add('active');
-          }
-        }
+        let currentSlide = 0;
+        let autoplayInterval;
         
-        currentSlide = index;
-      }
-      
-      function nextSlide() {
-        const next = (currentSlide + 1) % slides.length;
-        showSlide(next);
-      }
-      
-      function prevSlide() {
-        const prev = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prev);
-      }
-      
-      function startAutoplay() {
-        if (autoplay && slides.length > 1) {
-          autoplayInterval = setInterval(nextSlide, speed);
-        }
-      }
-      
-      function stopAutoplay() {
-        if (autoplayInterval) {
-          clearInterval(autoplayInterval);
-        }
-      }
-      
-      // Event listeners for dots
-      dots.forEach(function(dot, index) {
-        dot.addEventListener('click', function() {
-          const slideNumber = parseInt(dot.getAttribute('data-slide'));
-          const slideIndex = Array.from(slides).findIndex(slide => 
-            slide.getAttribute('data-slide') === slideNumber.toString()
-          );
-          if (slideIndex !== -1) {
-            showSlide(slideIndex);
-          }
-          stopAutoplay();
-          startAutoplay();
-        });
-      });
-      
-      // Event listeners for arrows
-      if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-          prevSlide();
-          stopAutoplay();
-          startAutoplay();
-        });
-      }
-      
-      if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-          nextSlide();
-          stopAutoplay();
-          startAutoplay();
-        });
-      }
-      
-      // Pause autoplay on hover
-      slideshow.addEventListener('mouseenter', stopAutoplay);
-      slideshow.addEventListener('mouseleave', startAutoplay);
-      
-      // Touch/Drag functionality
-      let startX = 0;
-      let startY = 0;
-      let isDragging = false;
-      let startTime = 0;
-      
-      function handleTouchStart(e) {
-        const touch = e.touches ? e.touches[0] : e;
-        startX = touch.clientX;
-        startY = touch.clientY;
-        startTime = Date.now();
-        isDragging = true;
-        stopAutoplay();
-      }
-      
-      function handleTouchMove(e) {
-        if (!isDragging) return;
-        e.preventDefault(); // Prevent scrolling
-      }
-      
-      function handleTouchEnd(e) {
-        if (!isDragging) return;
-        
-        const touch = e.changedTouches ? e.changedTouches[0] : e;
-        const endX = touch.clientX;
-        const endY = touch.clientY;
-        const endTime = Date.now();
-        
-        const deltaX = endX - startX;
-        const deltaY = endY - startY;
-        const deltaTime = endTime - startTime;
-        
-        // Check if it's a swipe (not just a tap)
-        const minSwipeDistance = 50;
-        const maxSwipeTime = 300;
-        
-        if (Math.abs(deltaX) > Math.abs(deltaY) && 
-            Math.abs(deltaX) > minSwipeDistance && 
-            deltaTime < maxSwipeTime) {
+        function showSlide(index) {
+          // Hide all slides
+          slides.forEach(function(slide, i) {
+            slide.classList.remove('active');
+            if (dots[i]) {
+              dots[i].classList.remove('active');
+            }
+          });
           
-          if (deltaX > 0) {
-            // Swipe right - go to previous slide
-            prevSlide();
-          } else {
-            // Swipe left - go to next slide
-            nextSlide();
+          // Show current slide
+          if (slides[index]) {
+            slides[index].classList.add('active');
+            if (dots[index]) {
+              dots[index].classList.add('active');
+            }
+          }
+          
+          currentSlide = index;
+        }
+        
+        function nextSlide() {
+          const next = (currentSlide + 1) % slides.length;
+          showSlide(next);
+        }
+        
+        function prevSlide() {
+          const prev = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(prev);
+        }
+        
+        function startAutoplay() {
+          if (autoplay && slides.length > 1) {
+            stopAutoplay();
+            autoplayInterval = setInterval(nextSlide, speed);
           }
         }
         
-        isDragging = false;
-        startAutoplay();
-      }
-      
-      // Add touch event listeners
-      slideshow.addEventListener('touchstart', handleTouchStart, { passive: false });
-      slideshow.addEventListener('touchmove', handleTouchMove, { passive: false });
-      slideshow.addEventListener('touchend', handleTouchEnd, { passive: false });
-      
-      // Add mouse event listeners for desktop drag
-      slideshow.addEventListener('mousedown', handleTouchStart);
-      slideshow.addEventListener('mousemove', handleTouchMove);
-      slideshow.addEventListener('mouseup', handleTouchEnd);
-      slideshow.addEventListener('mouseleave', function() {
-        if (isDragging) {
+        function stopAutoplay() {
+          if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+          }
+        }
+        
+        // Event listeners for dots
+        dots.forEach(function(dot) {
+          dot.addEventListener('click', function() {
+            const slideNumber = parseInt(dot.getAttribute('data-slide'));
+            const slideIndex = Array.from(slides).findIndex(slide => 
+              slide.getAttribute('data-slide') === slideNumber.toString()
+            );
+            if (slideIndex !== -1) {
+              showSlide(slideIndex);
+            }
+            stopAutoplay();
+            startAutoplay();
+          });
+        });
+        
+        // Event listeners for arrows
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function() {
+            prevSlide();
+            stopAutoplay();
+            startAutoplay();
+          });
+        }
+        
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function() {
+            nextSlide();
+            stopAutoplay();
+            startAutoplay();
+          });
+        }
+        
+        // Pause autoplay on hover
+        slideshow.addEventListener('mouseenter', stopAutoplay);
+        slideshow.addEventListener('mouseleave', startAutoplay);
+        
+        // Touch/Drag functionality
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        let startTime = 0;
+        
+        function handleTouchStart(e) {
+          const touch = e.touches ? e.touches[0] : e;
+          startX = touch.clientX;
+          startY = touch.clientY;
+          startTime = Date.now();
+          isDragging = true;
+          stopAutoplay();
+        }
+        
+        function handleTouchMove(e) {
+          if (!isDragging) return;
+          e.preventDefault(); // Prevent scrolling
+        }
+        
+        function handleTouchEnd(e) {
+          if (!isDragging) return;
+          
+          const touch = e.changedTouches ? e.changedTouches[0] : e;
+          const endX = touch.clientX;
+          const endY = touch.clientY;
+          const endTime = Date.now();
+          
+          const deltaX = endX - startX;
+          const deltaY = endY - startY;
+          const deltaTime = endTime - startTime;
+          
+          // Check if it's a swipe (not just a tap)
+          const minSwipeDistance = 50;
+          const maxSwipeTime = 300;
+          
+          if (Math.abs(deltaX) > Math.abs(deltaY) && 
+              Math.abs(deltaX) > minSwipeDistance && 
+              deltaTime < maxSwipeTime) {
+            
+            if (deltaX > 0) {
+              // Swipe right - go to previous slide
+              prevSlide();
+            } else {
+              // Swipe left - go to next slide
+              nextSlide();
+            }
+          }
+          
           isDragging = false;
           startAutoplay();
         }
+        
+        // Add touch event listeners
+        slideshow.addEventListener('touchstart', handleTouchStart, { passive: false });
+        slideshow.addEventListener('touchmove', handleTouchMove, { passive: false });
+        slideshow.addEventListener('touchend', handleTouchEnd, { passive: false });
+        
+        // Add mouse event listeners for desktop drag
+        slideshow.addEventListener('mousedown', handleTouchStart);
+        slideshow.addEventListener('mousemove', handleTouchMove);
+        slideshow.addEventListener('mouseup', handleTouchEnd);
+        slideshow.addEventListener('mouseleave', function() {
+          if (isDragging) {
+            isDragging = false;
+            startAutoplay();
+          }
+        });
+        
+        // Prevent context menu on long press
+        slideshow.addEventListener('contextmenu', function(e) {
+          if (isDragging) {
+            e.preventDefault();
+          }
+        });
+        
+        // Start autoplay
+        startAutoplay();
       });
-      
-      // Prevent context menu on long press
-      slideshow.addEventListener('contextmenu', function(e) {
-        if (isDragging) {
-          e.preventDefault();
-        }
-      });
-      
-      // Start autoplay
-      startAutoplay();
-    });
-  }
+    }
+  });
 </script>
 
 {% schema %}
