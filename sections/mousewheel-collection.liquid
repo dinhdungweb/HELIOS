@@ -21,8 +21,6 @@
             {% if desktop_image != blank or mobile_image != blank %}
               <div class="swiper-slide" {{ block.shopify_attributes }}>
                 <div class="slide-content image-slide">
-                
-                {% if desktop_image != blank or mobile_image != blank %}
                   <div class="image-wrapper">
                     <!-- Desktop Image -->
                     {% if desktop_image != blank %}
@@ -58,7 +56,6 @@
                           </a>
                         {% endif %}
                       </div>
-                    {% endif %}
                   </div>
                 </div>
               </div>
